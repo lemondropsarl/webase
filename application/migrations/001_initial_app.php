@@ -18,7 +18,7 @@ class Migration_initial_app extends CI_Migration {
         ]));
         $this->dbforge->create_table('version',TRUE);
         //drop tables 'ci_sessions' if it does not exist
-		$this->dbforge->drop_table($this->tables['ci_sessions'], TRUE);
+		$this->dbforge->drop_table('ci_sessions', TRUE);
 		$this->dbforge->add_field([
 			'id'=>[
 				'type'=>'VARCHAR',
