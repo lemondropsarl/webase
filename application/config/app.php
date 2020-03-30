@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |--------------------------------------------------------------------------
 */
 $config['application']['version']   = '1.0';
-$config['application']['name']      = 'WEBASE';
+$config['application']['name']      = 'Webase';
 $config['application']['tag']       = '';
 $config['application']['logo_url']  = '';
 
