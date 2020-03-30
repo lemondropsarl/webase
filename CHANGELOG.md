@@ -1,6 +1,7 @@
-# This file specify the changes in each version
+# Change Log
 
-### version 1.0
+### version 0.1
 
 - HMVC - Modular extension 
 - MIgration - Migrate each module independently
+- User friendly DB Installation at first run

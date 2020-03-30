@@ -31,8 +31,24 @@ it is very easy to get a copy of webase and start a new project right away
 * Open in Browser `exemple : http://localhost/webase/`
 
 * Create your module in `application/modules/` folder
+your controllers must `extends MX_Controller`
+
+```
+<?php
+class Xyz extends MX_Controller 
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
+}
+
+```
 * Start developping your new project
 
+Controllers may be loaded from application/controllers sub-directories.
+
+Controllers may also be loaded from module/controllers sub-directories.
 
 ## Featured
 
