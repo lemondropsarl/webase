@@ -15,7 +15,7 @@ Module Controllers can be used as normal Controllers or HMVC Controllers and the
 
 ## Why bother with migration?
 
-## Getting sdtarted
+## Getting started
 
 it is very easy to get a copy of webase and start a new project right away
 
