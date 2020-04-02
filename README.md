@@ -14,6 +14,7 @@ HMVC stands for Hierarchical Model View Controller.
 Module Controllers can be used as normal Controllers or HMVC Controllers and they can be used as widgets to help you build view partials.
 
 ## Why bother with migration?
+Migration is a best way to sync your database schema from live to local or other team your working with automatically and in a good and best practice.
 
 ## Getting started
 
@@ -21,13 +22,12 @@ it is very easy to get a copy of webase and start a new project right away
 
 #### Prerequisites
 1. PHP >= 5.8 (Recommended using version 7.3)
-2. on local machine use **MAMP** or **XAMP**
+2. on Windows local machine use **MAMP** or **XAMP**
 
 #### Installation and running
 
 * Clone the project `git clone https://github.com/lemondropsarl/webase.git`
 * Run composer `composer install`
-* modify config file `$config['base_url'] = 'path according to your setup'`
 * Open in Browser `exemple : http://localhost/webase/`
 
 * Create your module in `application/modules/` folder
@@ -50,6 +50,12 @@ Controllers may be loaded from application/controllers sub-directories.
 
 Controllers may also be loaded from module/controllers sub-directories.
 
+#### Unit Testing
+
+* check `application/test/` folder and all tests files are created inside
+* to create test for you modules : create your module folder in `application/tests/modules/` folder see example for `dashboard` folder
+* Run Test : `vendor/bin/phpunit -c application/tests/
+
 ## Featured
 
 * [Material Dashboard](https://demos.creative-tim.com/material-dashboard-dark/docs/2.0/getting-started/introduction.html)
@@ -59,6 +65,13 @@ Material Dashboard is a free Material Bootstrap Admin with a fresh, new design i
 Material Dashboard makes use of light, surface and movement. The general layout resembles sheets of paper following multiple different layers, so that the depth and order is obvious. The navigation stays mainly on the left sidebar and the content is on the right inside the main panel.
 
 This product came as a result of users asking for a material dashboard after we released our successful [Material Kit](https://www.creative-tim.com/product/material-kit). We developed it based on your feedback and it is a powerful bootstrap admin dashboard, which allows you to build products like admin panels, content managements systems and CRMs.
+
+# How to contribute
+
+* Fork the project
+* Clone the project and start working on your feature
+* Commit to your origin remote
+* pull request on `develop branch` leave the `master branch` **ALONE**
 
 
 
