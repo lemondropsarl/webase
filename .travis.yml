@@ -1,6 +1,6 @@
 langage: php
 php:
-    - '7.3'
+    - 7.3
 
 install:
     - composer install
@@ -10,4 +10,4 @@ cache:
         - ./vendor
 
 script:
-    - php vendor/bin/phpunit
+    - vendor/bin/phpunit -c application/tests/
