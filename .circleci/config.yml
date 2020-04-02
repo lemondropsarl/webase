@@ -56,3 +56,6 @@ jobs:
       - run: vendor/bin/phpunit -c application/tests/
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
+      general:
+          artifacts:
+             - "application/tests/build/logs"
