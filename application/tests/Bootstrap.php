@@ -323,7 +323,7 @@ switch (ENVIRONMENT)
 		// Assume Composer with a vendor directory parallel to the application directory
 		define('CI_PHPUNIT_TESTPATH', implode(
 			DIRECTORY_SEPARATOR,
-			[dirname(APPPATH), 'vendor', 'kenjis', 'ci-phpunit-test', 'application', 'tests', '_ci_phpunit_test']
+			[dirname(APPPATH), 'vendor', 'cedriclange', 'ci-phpunit', 'application', 'tests', '_ci_phpunit_test']
 		).DIRECTORY_SEPARATOR);
 	}
 
@@ -379,9 +379,9 @@ MonkeyPatchManager::init([
 
 require CI_PHPUNIT_TESTPATH . '/CIPHPUnitTest.php';
 
-//CIPHPUnitTest::init();
+CIPHPUnitTest::init();
 // Or you can set directories for autoloading
-
+/*
 CIPHPUnitTest::init([
 	// Directories for autoloading
 	APPPATH.'models',
@@ -389,4 +389,4 @@ CIPHPUnitTest::init([
 	APPPATH.'controllers',
 	APPPATH.'modules',
 ]);
-
+*/
