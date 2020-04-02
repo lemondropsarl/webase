@@ -11,6 +11,7 @@
 class CIPHPUnitTest
 {
 	private static $loader_class = 'CI_Loader';
+	private static $config_class = 'CI_Config';
 	private static $autoload_dirs;
 
 	/**
@@ -81,9 +82,25 @@ class CIPHPUnitTest
 
 		// This code is here, not to cause errors with HMVC
 		self::replaceLoader();
+		self::replaceConfig();
 
 		// Restore $_SERVER. We need this for NetBeans
 		$_SERVER = $_server_backup;
+	}
+	protected static function replaceConfig()
+	{
+		$my_config_file =
+			APPPATH . 'core/' . config_item('subclass_prefix') . 'Config.php';
+
+		if (file_exists($my_config_file))
+		{
+			self::$config_class = config_item('subclass_prefix') . 'Config';
+			if ( ! class_exists(self::$config_class))
+			{
+				require $my_config_file;
+			}
+		}
+		self::loadConfig();
 	}
 
 	public static function createCodeIgniterInstance()
@@ -138,6 +155,11 @@ class CIPHPUnitTest
 			require $my_helper_file;
 		}
 		require __DIR__ . '/replacing/helpers/url_helper.php';
+	}
+	public static function loadConfig()
+	{
+		$config= new self::$config_class;
+		load_class_instance('Config', $config);
 	}
 
 	public static function setPatcherCacheDir($dir = null)
