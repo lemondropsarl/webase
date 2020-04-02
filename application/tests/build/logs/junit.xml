@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="3" assertions="3" failures="0" errors="0" time="0.070211">
-    <testsuite name="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" tests="3" assertions="3" failures="0" errors="0" time="0.070211">
-      <testcase name="test_index" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="13" assertions="1" time="0.057163"/>
-      <testcase name="test_method_404" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="20" assertions="1" time="0.011291"/>
-      <testcase name="test_APPPATH" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="26" assertions="1" time="0.001757"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="3" assertions="3" failures="0" errors="0" time="0.067831">
+    <testsuite name="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" tests="3" assertions="3" failures="0" errors="0" time="0.067831">
+      <testcase name="test_index" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="13" assertions="1" time="0.055318"/>
+      <testcase name="test_method_404" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="20" assertions="1" time="0.010900"/>
+      <testcase name="test_APPPATH" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="26" assertions="1" time="0.001613"/>
     </testsuite>
   </testsuite>
 </testsuites>
