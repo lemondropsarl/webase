@@ -52,8 +52,8 @@ Controllers may also be loaded from module/controllers sub-directories.
 
 #### Unit Testing
 
-* check `application/test/` folder and all tests files are created inside
-* to create test for you modules : create your module folder in `application/tests/modules/` folder see example for `dashboard` folder
+* check `application/tests/` folder and all tests files are created inside
+* to create test for you modules : create your module folder in `application/tests/modules/` folder.  see example for `dashboard` folder
 * Run Test : `vendor/bin/phpunit -c application/tests/
 
 ## Featured
