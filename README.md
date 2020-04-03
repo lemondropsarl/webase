@@ -1,9 +1,14 @@
 # Webase
 
+[![GitHub version](https://badge.fury.io/gh/lemondropsarl%2Fwebase.svg)](https://badge.fury.io/gh/lemondropsarl%2Fwebase)
+[![Build Status](https://travis-ci.org/lemondropsarl/webase.svg?branch=master)](https://travis-ci.org/lemondropsarl/webase)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Coverage Status](https://coveralls.io/repos/github/lemondropsarl/webase/badge.svg?branch=master)](https://coveralls.io/github/lemondropsarl/webase?branch=master)
 
-Webase is a php robust cocktail of built on top of **CodeIngiter** to help developers 
-starting a new project with no worries about the foundation or starting from scratch
-with webase you get **HMVC**, **Migrations**, **Authentication** and many more features
+
+Webase is a php cocktail of base project built on top of **CodeIngiter** to help developers 
+start building new project with no worries about the foundation or starting from scratch
+with webase you get **HMVC**, **MOdular Migrations**, **Authentication** and many more features
 
 ## What is HMVC - Modular Extension?
 
@@ -14,6 +19,7 @@ HMVC stands for Hierarchical Model View Controller.
 Module Controllers can be used as normal Controllers or HMVC Controllers and they can be used as widgets to help you build view partials.
 
 ## Why bother with migration?
+
 Migration is a best way to sync your database schema from live to local or other team your working with automatically and in a good and best practice.
 
 ## Getting started
@@ -53,7 +59,7 @@ Controllers may also be loaded from module/controllers sub-directories.
 #### Unit Testing
 
 * check `application/tests/` folder and all tests files are created inside
-* to create test for you modules : create your module folder in `application/tests/modules/` folder.  see example for `dashboard` folder
+* to create test for you controllers in `application/tests/controllers/` folder.  see example for `welcome_test.php` 
 * Run Test : `vendor/bin/phpunit -c application/tests/
 
 ## Featured
@@ -61,8 +67,6 @@ Controllers may also be loaded from module/controllers sub-directories.
 * [Material Dashboard](https://demos.creative-tim.com/material-dashboard-dark/docs/2.0/getting-started/introduction.html)
 
 Material Dashboard is a free Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design. We are very excited to introduce our take on the material concepts through an easy to use and beautiful set of components. Material Dashboard was built over the popular Bootstrap framework and it comes with a couple of third-party plugins redesigned to fit in with the rest of the elements.
-
-Material Dashboard makes use of light, surface and movement. The general layout resembles sheets of paper following multiple different layers, so that the depth and order is obvious. The navigation stays mainly on the left sidebar and the content is on the right inside the main panel.
 
 This product came as a result of users asking for a material dashboard after we released our successful [Material Kit](https://www.creative-tim.com/product/material-kit). We developed it based on your feedback and it is a powerful bootstrap admin dashboard, which allows you to build products like admin panels, content managements systems and CRMs.
 

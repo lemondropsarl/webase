@@ -1,6 +1,6 @@
 {
-	"description": "The CodeIgniter framework",
-	"name": "codeigniter/framework",
+	"name": "cedriclange/webase",
+	"description": "An easy way to start a PHP project based on CodeIgniter",
 	"type": "project",
 	"homepage": "https://codeigniter.com",
 	"license": "MIT",
@@ -10,6 +10,12 @@
 		"slack": "https://codeigniterchat.slack.com",
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
+	"authors": [
+        {
+            "name": "Cedric Mataso",
+            "homepage": "https://github.com/cedriclange"
+        }
+    ],
 	"require": {
 		"php": ">=5.3.7",
 		"cedriclange/ci-phpunit": "^0.17.4"
