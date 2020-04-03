@@ -231,7 +231,7 @@ $this->app = $this->config->item('application', 'app');
 							<div class="col-lg-12">
 								<div class="p-5">
 									<div class="text-center">
-										<h2><?php echo $this->app['name'];?> INSTALLATION</h2>
+										<h2><?php echo $this->app['name'];?> Installation</h2>
 									</div>
 								</div>
 							</div>

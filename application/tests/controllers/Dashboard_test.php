@@ -13,7 +13,6 @@ class dahsboard_test extends TestCase
 	public function test_index()
 	{
 		$output = $this->request('GET', 'dashboard');
-		//$this->assertContains('<title>Welcome to CodeIgniter</title>', $output);
 		$this->assertRedirect('auth/login');
 	}
 
