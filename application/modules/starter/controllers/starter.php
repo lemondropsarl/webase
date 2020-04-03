@@ -19,18 +19,22 @@ class Starter extends MX_Controller {
             if (sizeof($tb) > 0) {
                                 
                 if (count($this->db->get('users')->num_rows()) >=  1) {
-                       # code...
+                     $this->load->library('session');
+                     $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+                     $acceptLang = ['french','english'];
+                     $lang = in_array($lang, $acceptLang) ? $lang : 'english';
+                     
+                     $this->session->set_userdata('site_lang',$lang);
+                    
                     redirect('dashboard');
                 }
             }else {
                    # code...
                 $this->load->library('migration');
                 $this->migration->migrate_all_modules();
-                
-               }
-            }         
+            }
+        }
     }
-        
     /**
      * index
      *

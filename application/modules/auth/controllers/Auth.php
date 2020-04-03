@@ -18,9 +18,16 @@ class Auth extends MX_Controller
 		//$this->load->library('migration');
 		$this->load->helper(['url', 'language']);
 		$this->load->model('ion_auth_model');
-		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-
 		
+		$siteLang = $this->session->userdata('site_lang');
+        if ($siteLang) {
+		   $this->lang->load('auth',$siteLang);
+		   $this->lang->load('ion_auth',$siteLang);
+        } else {
+		   $this->lang->load('auth','english');
+		   $this->lang->load('ion_auth','english');
+        }
+		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 	}
 
 	/**

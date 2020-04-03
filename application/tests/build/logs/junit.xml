@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="4" assertions="4" failures="0" errors="0" time="0.104980">
-    <testsuite name="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" tests="3" assertions="3" failures="0" errors="0" time="0.081590">
-      <testcase name="test_index" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="13" assertions="1" time="0.067341"/>
-      <testcase name="test_method_404" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="20" assertions="1" time="0.012271"/>
-      <testcase name="test_APPPATH" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="26" assertions="1" time="0.001978"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="4" assertions="4" failures="0" errors="0" time="0.125884">
+    <testsuite name="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" tests="3" assertions="3" failures="0" errors="0" time="0.101172">
+      <testcase name="test_index" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="13" assertions="1" time="0.082347"/>
+      <testcase name="test_method_404" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="19" assertions="1" time="0.016280"/>
+      <testcase name="test_APPPATH" class="dahsboard_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Dashboard_test.php" line="25" assertions="1" time="0.002545"/>
     </testsuite>
-    <testsuite name="starter_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Starter_test.php" tests="1" assertions="1" failures="0" errors="0" time="0.023390">
-      <testcase name="test_index" class="starter_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Starter_test.php" line="10" assertions="1" time="0.023390"/>
+    <testsuite name="starter_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Starter_test.php" tests="1" assertions="1" failures="0" errors="0" time="0.024712">
+      <testcase name="test_index" class="starter_test" file="C:\MAMP\htdocs\webase\application\tests\controllers\Starter_test.php" line="11" assertions="1" time="0.024712"/>
     </testsuite>
   </testsuite>
 </testsuites>

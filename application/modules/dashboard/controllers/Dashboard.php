@@ -11,6 +11,12 @@ class Dashboard extends MX_Controller {
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login');
 		}
+		$siteLang = $this->session->userdata('site_lang');
+        if ($siteLang) {
+           $this->lang->load('main',$siteLang);
+        } else {
+           $this->lang->load('main','english');
+        }
 
 	}
 	

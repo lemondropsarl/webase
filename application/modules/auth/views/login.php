@@ -36,33 +36,30 @@ $this->app = $this->config->item('application','app');
 					<div class="text-center">
 						<h1 class="h4 text-light">Webase connect</h1>
 					</div>
+					<hr>
 					<?php echo form_open('auth/login');?>
 
-					<div class="form-group">
-
-						<input type="text" class="form-control form-control-user" id="username" name="username"
-							placeholder="Username">
+					<div class="form-group bmd-form-group">
+						<label class="bmd-label-floating"><?php echo $this->lang->line('login_username_label') ?></label>
+						<input type="text" class="form-control" name="username" />
 					</div>
-					<div class="form-group">
-
-						<input type="password" class="form-control form-control-user" id="password" name="password"
-							placeholder="Password">
+					<div class="form-group bmd-form-group">
+						<label class="bmd-label-floating"><?php echo $this->lang->line('login_password_label'); ?></label>
+						<input type="password" class="form-control" name="password"/>>
 					</div>
 					<div class="form-group">
 						<div class="custom-control custom-checkbox small">
 							<input type="checkbox" class="custom-control-input" id="remember">
-							<label class="custom-control-label" for="remember">Remember me</label>
+							<label class="custom-control-label" for="remember"><?php echo $this->lang->line('login_remember_label');?></label>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary btn-user btn-block">
-						Login
+						<?php echo $this->lang->line('login_heading'); ?>
 					</button>
-					<hr>
-
 					<?php echo form_close();?>
 					<hr>
 					<div class="text-center">
-						<a class="small" href="">Forgot password</a>
+						<a class="small" href=""><?php echo $this->lang->line('forgot_password_heading') ;?></a>
 					</div>
 				</div>
 			</divc>
