@@ -13,7 +13,7 @@ class starter_test extends TestCase
         $database_file = APPPATH.'config/database.php';
         if (!file_exists($database_file)) {
            $output = $this->request('GET','starter');
-           $this->assertContains('<h2>Webase Installation</h2>',$output);;
+           $this->assertContains('<h2>Webase Installation</h2>',$output);
         }
     }
 }
