@@ -168,7 +168,7 @@ $this->app = $this->config->item('application', 'app');
 
 				<div class="form-group">
 					<span class="input-group-addon">First name</span>
-					<input type="text" class="form-control" name="fname" placeholder="example : LEmondrop" required />
+					<input type="text" class="form-control" name="fname" placeholder="example : Lemondrop" required />
 				</div>
 				<div class="form-group">
 					<span class="input-group-addon">Last name</span>
@@ -180,11 +180,11 @@ $this->app = $this->config->item('application', 'app');
 				</div>
 				<div class="form-group">
 					<span class="input-group-addon">Company</span>
-					<input type="text" class="form-control" name="company" placeholder="example : LEmondrop" required />
+					<input type="text" class="form-control" name="company" placeholder="example : Lemondrop" required />
 				</div>
 				<div class="form-group">
 					<span class="input-group-addon">Phone number</span>
-					<input type="text" class="form-control" name="phone" placeholder="example : admin" required />
+					<input type="text" class="form-control" name="phone" placeholder="example : +243990000000" required />
 				</div>
 				<div class="form-group">
 					<span class="input-group-addon">Username</span>
@@ -213,7 +213,7 @@ $this->app = $this->config->item('application', 'app');
 					<h5>INSTALLATION DONE SUCCESSFULLY</h5>
 				</div>
 
-				<div class="form-horizontal">
+				<div class="form-horizontal text-center">
 					<a class="btn btn-success square-btn-adjust" title="Goto Application"
 						href="<?php echo base_url('dashboard');?>">Go to Application</a>
 				</div>
@@ -235,7 +235,7 @@ $this->app = $this->config->item('application', 'app');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-12">
 
 									<?php
 									if ($req == 1) {
@@ -269,7 +269,7 @@ $this->app = $this->config->item('application', 'app');
 										** Step 3 - Ask for System administrator Username and Password
 										*************************************************************/
 										?>
-							<div class="col-lg-6">
+							<div class="col-lg-12">
 									<?php	
 									display_finish_form();
 								} ?>
