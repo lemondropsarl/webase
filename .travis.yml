@@ -10,4 +10,4 @@ cache:
         - ./vendor
 
 script:
-    - vendor/bin/phpunit --no-coverage -c application/tests/
+    - vendor/bin/phpunit -c application/tests/

@@ -90,14 +90,7 @@ $this->app = $this->config->item('application', 'app');
 				return TRUE;
 			}
 		}
-		function does_database_exist($server, $username, $password,$dbname){
-			$mysql = mysqli_connect($server, $username, $password,$dbname);
-			if (!$mysql) {
-				return 0;
-			}else{
-				return 1;
-			}
-		}
+		
 		function are_tables_created($dbprefix,$con){
 			$sql = "SHOW TABLES LIKE version";
             $result = mysqli_query($con,$sql);
@@ -115,32 +108,33 @@ $this->app = $this->config->item('application', 'app');
 			?>
 
 <div class=" p-3">
-	<div class=" text-gray-500">
-		<h5>Step 1 : DATABASE INSTALLATION</h5>
+	<div class=" text-success">
+		<h5>Step 1 : Database Installation</h5>
 	</div>
-	<div class="text">
+	<div class="text-light">
 		<h6>Fill in the details</h6>
 	</div>
+	<hr>
 	<?php echo form_open('starter/install');?>
 	<input type="hidden" name="step" value="1" />
-	<div class="form-group">
-		<span class=" input-group-addon">Host Name</span>
-		<input type="text" class="form-control" name="server" placeholder="localhost" required />
-	<span class="small">Get it from your host, if <strong>localhost</strong>
+	<div class="form-group bmd-form-group">
+		<label class=" bmd-label-floating">Host Name</label>
+		<input type="text" class="form-control" name="server" required />
+	<span class="small text-success">Get it from your host, if <strong>localhost</strong>
 		doesn't work.</span>
 	</div>
-	<div class="form-group">
-		<span class="input-group-addon">Database name</span>
-		<input type="text" class="form-control" name="dbname" placeholder="example: Webase" required />
+	<div class="form-group bmd-form-group">
+		<label class="bmd-label-floating">Database name</label>
+		<input type="text" class="form-control" name="dbname"  required />
 	</div>
 
-	<div class="form-group">
-		<span class="input-group-addon"> MySQL Username</span>
-		<input type="text" class="form-control" name="username" placeholder="MySQL Username" required />
+	<div class="form-group bmd-form-group">
+		<label class=" bmd-label-floating">MySql Username</label>
+		<input type="text" class="form-control" name="username"  required />
 	</div>
-	<div class="form-group">
-		<span class="input-group-addon">MySQL Password</span>
-		<input type="text" class="form-control" name="password" placeholder="MySQL Password" />
+	<div class="form-group  bmd-form-group">
+		<label class=" bmd-label-floating">MySql Username</label>
+		<input type="text" class="form-control" name="password" required />
 	</div>
 	<button type="submit" name="submit" class="btn btn-success" />Install</button>
 	<?php echo form_close();?>
@@ -157,47 +151,47 @@ $this->app = $this->config->item('application', 'app');
 			}
 			?>
 <div class="p-3">
-	<div class=" text-gray-500">
-		<h5>Step 2 : ADMIN USER CREATION</h5>
+	<div class=" text-success">
+		<h5>Step 2 : Admin user creation</h5>
 	</div>
-	<div class="text">
+	<div class="text-light">
 		<h6>Fill in the details</h6>
 	</div>
+	<hr>
 	<?php echo form_open('starter/install');?>
 				<input type="hidden" name="step" value="2" />
 
-				<div class="form-group">
-					<span class="input-group-addon">First name</span>
-					<input type="text" class="form-control" name="fname" placeholder="example : Lemondrop" required />
+				<div class="form-group bmd-form-group">
+					<label class=" bmd-label-floating">First name</label>
+					<input type="text" class="form-control" name="fname"  required />
 				</div>
-				<div class="form-group">
-					<span class="input-group-addon">Last name</span>
-					<input type="text" class="form-control" name="lname" placeholder="example : Lemondrop" required />
+				<div class="form-group bmd-form-group">
+					<label class=" bmd-label-floating">Last name</label>
+					<input type="text" class="form-control" name="lname" required />
 				</div>
-				<div class="form-group">
-					<span class="input-group-addon">Email</span>
-					<input type="text" class="form-control" name="email" placeholder="example : admin@example.com" required />
+				<div class="form-group bmd-form-group">
+					<label class=" bmd-label-floating">Email</label>
+					<input type="text" class="form-control" name="email" required />
 				</div>
-				<div class="form-group">
-					<span class="input-group-addon">Company</span>
-					<input type="text" class="form-control" name="company" placeholder="example : Lemondrop" required />
+				<div class="form-group bmd-form-group">
+					<label class=" bmd-label-floating">Company</label>
+					<input type="text" class="form-control" name="company" required />
 				</div>
-				<div class="form-group">
-					<span class="input-group-addon">Phone number</span>
-					<input type="text" class="form-control" name="phone" placeholder="example : +243990000000" required />
+				<div class="form-group bmd-form-group">
+					<label class=" bmd-label-floating">Phone number</label>
+					<input type="text" class="form-control" name="phone" required />
 				</div>
-				<div class="form-group">
-					<span class="input-group-addon">Username</span>
-					<input type="text" class="form-control" name="username" placeholder="example : admin" required />
+				<div class="form-group bmd-form-group">
+					<label class=" bmd-label-floating">Username</label>
+					<input type="text" class="form-control" name="username"required />
 				</div>
-				<div class="form-group ">
-					<span class="input-group-addon">Password</span>
-					<input type="password" class="form-control" name="password" placeholder="Mot de passe" />
+				<div class="form-group bmd-form-group">
+				<label class=" bmd-label-floating">Password</label>
+					<input type="password" class="form-control" name="password"/>
 				</div>
-				<div class="form-group">
-					<span class="input-group-addon">Confirm Password</span>
-					<input type="password" class="form-control" name="confirm_password"
-						placeholder="Confirm Password" />
+				<div class="form-group bmd-form-group">
+				<label class=" bmd-label-floating">Confirm password</label>
+					<input type="password" class="form-control" name="confirm_password"/>
 				</div>
 				<button type="submit" name="submit" class="btn btn-success" />Create</button>
 				<?php form_close();?>
@@ -235,7 +229,7 @@ $this->app = $this->config->item('application', 'app');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-6">
 
 									<?php
 									if ($req == 1) {
@@ -246,10 +240,10 @@ $this->app = $this->config->item('application', 'app');
 										/************************************************************
 										** Step 1 - Ask for MySQL Credentials
 										*************************************************************/
-							
-										$message="";
-							
+									
 										display_form($message);
+										}else {
+											display_form($message);
 										}
 									}elseif ($req == 2) {
 							
@@ -260,7 +254,7 @@ $this->app = $this->config->item('application', 'app');
 										//$this->load->library('migration');
 										//$this->load->dbforge();
 						
-										display_system_admin_form("");
+										display_system_admin_form($message);
 						
 										?>
 							</div>

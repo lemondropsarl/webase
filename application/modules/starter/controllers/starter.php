@@ -44,6 +44,7 @@ class Starter extends MX_Controller {
     {
            # code...
             $data['req'] = 1;
+            $data['message'] = '';
             $this->load->view('index',$data);  
     }
       
@@ -62,41 +63,28 @@ class Starter extends MX_Controller {
           $dbname =$this->input->post('dbname');;
           
           
-          // Edit config/database.php file 
-          $sample_database_file = "application/config/sample-database.php";
-          $database_file = "application/config/database.php";
-          rename($sample_database_file,$database_file);
-          
-          $line_array = file($database_file);
+          // Edit config/database.php file       
+          if ($this->does_database_exist($server,$mysql_username,$mysql_password,$dbname)) {
+             $data['req'] = 1;
+             $data['message'] = 'Database name already exists , please change the name';
+             $this->load->view('index', $data);
 
-          for ($i = 0; $i < count($line_array); $i++) {
-
-              if (strstr($line_array[$i], "'hostname' => ")) {
-                  $line_array[$i] = '	   \'hostname\' => \'' . $server . '\',' . "\r\n";
+          }else {
+              //if database doesnt exist  proceed
+              //create db
+              $this->create_database($server,$mysql_username,$mysql_password,$dbname);
+              $sample_database_file = "application/config/sample-database.php";
+              $database_file = "application/config/database.php";
+              if (!file_exists($database_file)) {
+                  # code...
+                  rename($sample_database_file,$database_file);
               }
-              if (strstr($line_array[$i], "'username' =>")) {
-                  $line_array[$i] = '    \'username\' => \'' . $mysql_username . '\',' . "\r\n";
-              }
-              if (strstr($line_array[$i], "'password' => ")) {
-                  $line_array[$i] = '    \'password\' => \'' . $mysql_password . '\',' . "\r\n";
-              }														
+              $this->updateDatabaseFile($server,$mysql_username,$mysql_password,$dbname,$database_file);
+             
+              $data['req'] = 2;
+              $data['message'] ='create user';
+              $this->load->view('index',$data);      
           }
-          file_put_contents($database_file, $line_array);
-          //create db
-          $this->create_database($server,$mysql_username,$mysql_password,$dbname);
-          
-                  //update dbname
-         $line_array = file($database_file);
-
-         for ($i = 0; $i < count($line_array); $i++) {
-
-            if (strstr($line_array[$i], "'database' => ")) {
-            $line_array[$i] = '	   \'database\' => \'' . $dbname . '\',' . "\r\n";
-            }																			
-         }
-        file_put_contents($database_file, $line_array);       
-          $data['req'] = 2;
-          $this->load->view('index',$data);      
       }elseif ($req == 2) {
        
         $pwd = $this->input->post('password');
@@ -146,9 +134,10 @@ class Starter extends MX_Controller {
                 $data['req'] = 3;
                 $this->load->view('index', $data);
         }else {
-            echo "not match";
-        }
-            
+           $data['req'] = 2;
+           $data['message'] = 'Password does not match';
+           $this->load->view('index', $data);        
+        }           
       }
     }
     function get_database() {
@@ -169,14 +158,39 @@ class Starter extends MX_Controller {
         $conn = New Database;
           $conn->Connection($server,$mysql_username,$mysql_password);
           $con = $conn->get_Connection();
-          
+ 
           // Create Database
-         
-          //Does the database exists?							
+          //Does the database exists?
           $conn->CreateDatabase($dbname);
                   //correct the file and rename
           $conn->Close();
-                 
+    }
+    function does_database_exist($server, $username, $password,$dbname){
+        $conn = New Database;
+        $conn->Connection($server,$username, $password);
+        $flag =$conn->DatabaseExists($server,$username, $password,$dbname);
+        $conn->Close();
+        return $flag;
+    }
+    function updateDatabaseFile($server,$mysql_username, $mysql_password, $dbname, $database_file){
+        $line_array = file($database_file);
+
+          for ($i = 0; $i < count($line_array); $i++) {
+
+              if (strstr($line_array[$i], "'hostname' => ")) {
+                  $line_array[$i] = '	   \'hostname\' => \'' . $server . '\',' . "\r\n";
+              }
+              if (strstr($line_array[$i], "'username' =>")) {
+                  $line_array[$i] = '    \'username\' => \'' . $mysql_username . '\',' . "\r\n";
+              }
+              if (strstr($line_array[$i], "'password' => ")) {
+                  $line_array[$i] = '    \'password\' => \'' . $mysql_password . '\',' . "\r\n";
+              }	
+              if (strstr($line_array[$i], "'database' => ")) {
+                $line_array[$i] = '	   \'database\' => \'' . $dbname . '\',' . "\r\n";
+              }													
+          }
+          file_put_contents($database_file, $line_array);
     }
 
 }
@@ -215,13 +229,16 @@ class Database {
                 $db_connection = mysqli_connect($db_server, $db_username, $db_password, $db_database);
                 if (!$db_connection) {
                     throw new Exception('MySQL Connection Database Error: ' . mysqli_error($db_connection));
+                }else {
+                    return true;
                 }
             } catch (Exception $e) {
                 display_error($e->getMessage());
             }
         } else {
             $message = "No connection has been established to the database. Cannot open connection.";
-            display_error($message());
+            //display_error($message());
+            return false;
         }
     }
 
@@ -256,6 +273,14 @@ class Database {
             display_error($message);
         }
     }
+    public function DatabaseExists($server,$username, $password,$database){        
+        $mysql = @new mysqli($server, $$username, $password, $$database);
+        if (!$mysql) {          
+            return true;
+        }else{          
+            return false;
+        }
+    } 
 
 }
 /* End of file Starter.php */

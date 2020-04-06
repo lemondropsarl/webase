@@ -40,12 +40,12 @@ $this->app = $this->config->item('application','app');
 					<?php echo form_open('auth/login');?>
 
 					<div class="form-group bmd-form-group">
-						<label class="bmd-label-floating"><?php echo $this->lang->line('login_username_label') ?></label>
-						<input type="text" class="form-control" name="username" />
+						<label class="bmd-label-floating"><?php echo $this->lang->line('login_identity_label'); ?></label>
+						<input type="text" class="form-control" name="username" required />
 					</div>
 					<div class="form-group bmd-form-group">
 						<label class="bmd-label-floating"><?php echo $this->lang->line('login_password_label'); ?></label>
-						<input type="password" class="form-control" name="password"/>>
+						<input type="password" class="form-control" name="password" required/>
 					</div>
 					<div class="form-group">
 						<div class="custom-control custom-checkbox small">
