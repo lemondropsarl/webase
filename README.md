@@ -1,7 +1,6 @@
 # Webase
 
-[![GitHub version](https://badge.fury.io/gh/lemondropsarl%2Fwebase.svg)](https://badge.fury.io/gh/lemondropsarl%2Fwebase)
-[GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/lemondropsarl/webase)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/lemondropsarl/webase)
 [![Build Status](https://travis-ci.org/lemondropsarl/webase.svg?branch=master)](https://travis-ci.org/lemondropsarl/webase)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Coverage Status](https://coveralls.io/repos/github/lemondropsarl/webase/badge.svg?branch=master)](https://coveralls.io/github/lemondropsarl/webase?branch=master)
