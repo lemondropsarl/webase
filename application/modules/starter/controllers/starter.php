@@ -8,7 +8,14 @@ class Starter extends MX_Controller {
     public function __construct()
     {
         parent::__construct();
-        
+       
+        $this->load->helper(['url','language']);
+        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        $acceptLang = ['french','english'];
+        $lang = in_array($lang, $acceptLang) ? $lang : 'english';
+         
+        $this->lang->load('main',$lang);
+            
         //Check if the application has been installed or not
         $database_file = APPPATH.'config/database.php';
         if(file_exists($database_file)){
@@ -45,6 +52,7 @@ class Starter extends MX_Controller {
            # code...
             $data['req'] = 1;
             $data['message'] = '';
+           
             $this->load->view('index',$data);  
     }
       
@@ -82,7 +90,7 @@ class Starter extends MX_Controller {
               $this->updateDatabaseFile($server,$mysql_username,$mysql_password,$dbname,$database_file);
              
               $data['req'] = 2;
-              $data['message'] ='create user';
+              $data['message'] ='';
               $this->load->view('index',$data);      
           }
       }elseif ($req == 2) {

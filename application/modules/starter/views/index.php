@@ -10,7 +10,7 @@ $this->app = $this->config->item('application', 'app');
 <html>
 
 <head>
-	<title><?php echo $this->app['name'];?> - Installation</title>
+	<title><?php echo $this->app['name'];?> - <?php echo $this->lang->line('installation');?></title>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -109,34 +109,33 @@ $this->app = $this->config->item('application', 'app');
 
 <div class=" p-3">
 	<div class=" text-success">
-		<h5>Step 1 : Database Installation</h5>
+		<h5><?php echo lang('step_1'); ?></h5>
 	</div>
 	<div class="text-light">
-		<h6>Fill in the details</h6>
+		<h6><?php echo lang('t_fill_detail');?></h6>
 	</div>
 	<hr>
 	<?php echo form_open('starter/install');?>
 	<input type="hidden" name="step" value="1" />
 	<div class="form-group bmd-form-group">
-		<label class=" bmd-label-floating">Host Name</label>
+		<label class=" bmd-label-floating"><?php echo lang('host');?></label>
 		<input type="text" class="form-control" name="server" required />
-	<span class="small text-success">Get it from your host, if <strong>localhost</strong>
-		doesn't work.</span>
+	<span class="small text-light"><?php echo lang('host_msg');?></span>
 	</div>
 	<div class="form-group bmd-form-group">
-		<label class="bmd-label-floating">Database name</label>
+		<label class="bmd-label-floating"><?php echo lang('db_name');?></label>
 		<input type="text" class="form-control" name="dbname"  required />
 	</div>
 
 	<div class="form-group bmd-form-group">
-		<label class=" bmd-label-floating">MySql Username</label>
+		<label class=" bmd-label-floating"><?php echo lang('mysql_user');?></label>
 		<input type="text" class="form-control" name="username"  required />
 	</div>
 	<div class="form-group  bmd-form-group">
-		<label class=" bmd-label-floating">MySql Username</label>
+		<label class=" bmd-label-floating"><?php echo lang('mysql_password');?></label>
 		<input type="text" class="form-control" name="password" required />
 	</div>
-	<button type="submit" name="submit" class="btn btn-success" />Install</button>
+	<button type="submit" name="submit" class="btn btn-success" /><?php echo lang('submit_install');?></button>
 	<?php echo form_close();?>
 
 
@@ -152,48 +151,48 @@ $this->app = $this->config->item('application', 'app');
 			?>
 <div class="p-3">
 	<div class=" text-success">
-		<h5>Step 2 : Admin user creation</h5>
+		<h5><?php echo lang('step_2');?></h5>
 	</div>
 	<div class="text-light">
-		<h6>Fill in the details</h6>
+		<h6><?php echo lang('t_fill_detail');?></h6>
 	</div>
 	<hr>
 	<?php echo form_open('starter/install');?>
 				<input type="hidden" name="step" value="2" />
 
 				<div class="form-group bmd-form-group">
-					<label class=" bmd-label-floating">First name</label>
+					<label class=" bmd-label-floating"><?php echo lang('first_name');?></label>
 					<input type="text" class="form-control" name="fname"  required />
 				</div>
 				<div class="form-group bmd-form-group">
-					<label class=" bmd-label-floating">Last name</label>
+					<label class=" bmd-label-floating"><?php echo lang('last_name');?></label>
 					<input type="text" class="form-control" name="lname" required />
 				</div>
 				<div class="form-group bmd-form-group">
-					<label class=" bmd-label-floating">Email</label>
+					<label class=" bmd-label-floating"><?php echo lang('Email');?></label>
 					<input type="text" class="form-control" name="email" required />
 				</div>
 				<div class="form-group bmd-form-group">
-					<label class=" bmd-label-floating">Company</label>
+					<label class=" bmd-label-floating"><?php echo lang('Company');?></label>
 					<input type="text" class="form-control" name="company" required />
 				</div>
 				<div class="form-group bmd-form-group">
-					<label class=" bmd-label-floating">Phone number</label>
+					<label class=" bmd-label-floating"><?php echo lang('phone_number');?></label>
 					<input type="text" class="form-control" name="phone" required />
 				</div>
 				<div class="form-group bmd-form-group">
-					<label class=" bmd-label-floating">Username</label>
+					<label class=" bmd-label-floating"><?php echo lang('username');?></label>
 					<input type="text" class="form-control" name="username"required />
 				</div>
 				<div class="form-group bmd-form-group">
-				<label class=" bmd-label-floating">Password</label>
+				<label class=" bmd-label-floating"><?php echo lang('password');?></label>
 					<input type="password" class="form-control" name="password"/>
 				</div>
 				<div class="form-group bmd-form-group">
-				<label class=" bmd-label-floating">Confirm password</label>
+					<label class=" bmd-label-floating"><?php echo lang('password_confirm');?></label>
 					<input type="password" class="form-control" name="confirm_password"/>
 				</div>
-				<button type="submit" name="submit" class="btn btn-success" />Create</button>
+				<button type="submit" name="submit" class="btn btn-success"><?php echo lang('submit_create');?></button>
 				<?php form_close();?>
 
 		</div>
@@ -204,12 +203,12 @@ $this->app = $this->config->item('application', 'app');
 			?>
 			<div class="p-5">
 				<div class=" text-success text-center">
-					<h5>INSTALLATION DONE SUCCESSFULLY</h5>
+					<h5><?php echo lang('step_3'); ?></h5>
 				</div>
 
 				<div class="form-horizontal text-center">
 					<a class="btn btn-success square-btn-adjust" title="Goto Application"
-						href="<?php echo base_url('dashboard');?>">Go to Application</a>
+						href="<?php echo base_url('dashboard');?>"><?php echo lang('submit_go_to_app');?></a>
 				</div>
 			</div>
 	<?php	}
@@ -225,27 +224,29 @@ $this->app = $this->config->item('application', 'app');
 							<div class="col-lg-12">
 								<div class="p-5">
 									<div class="text-center">
-										<h2><?php echo $this->app['name'];?> Installation</h2>
+										<h2><?php echo $this->app['name'];?> <?php echo lang('installation');?></h2>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
+								<div class="row">
+								
+									<div class="col-md-6">
 
-									<?php
-									if ($req == 1) {
-									// Check if application is installled or not      
-										if (!is_installed()) {
+										<?php
+										if ($req == 1) {
+											// Check if application is installled or not      
+									
+											if (!is_installed()) {
 							
 							
-										/************************************************************
-										** Step 1 - Ask for MySQL Credentials
+											/************************************************************
+												** Step 1 - Ask for MySQL Credentials
 										*************************************************************/
 									
-										display_form($message);
-										}else {
 											display_form($message);
-										}
-									}elseif ($req == 2) {
+											}else {
+											display_form($message);
+											}
+										}elseif ($req == 2) {
 							
 										/************************************************************
 										** Step 2 - With given Credentials
@@ -257,16 +258,20 @@ $this->app = $this->config->item('application', 'app');
 										display_system_admin_form($message);
 						
 										?>
-							</div>
-							<?php   }elseif ($req == 3) {
+									</div>									
+										<?php }elseif($req == 3) {
 										/************************************************************
 										** Step 3 - Ask for System administrator Username and Password
 										*************************************************************/
 										?>
-							<div class="col-lg-12">
-									<?php	
-									display_finish_form();
-								} ?>
+										<div class="col-lg-12">
+										<?php
+											display_finish_form();
+										?>
+										</div>
+									<?php } ?>
+							
+								</div>
 							</div>
 								
 						</div>
