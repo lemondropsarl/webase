@@ -8,6 +8,7 @@ class Dashboard extends MX_Controller {
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+		$this->load->library('ion_auth_acl');
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login');
 		}
@@ -28,8 +29,10 @@ class Dashboard extends MX_Controller {
 	 */
 	public function index()
 	{
+		$data['users_groups']           =   $this->ion_auth->get_users_groups()->result();
+        $data['users_permissions']      =   $this->ion_auth_acl->build_acl();
 		$this->load->view('templates/header');
-		$this->load->view('index');
+		$this->load->view('index',$data);
 		$this->load->view('templates/footer');
 		
 	}

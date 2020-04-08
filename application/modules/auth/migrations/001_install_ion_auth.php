@@ -42,8 +42,12 @@ class Migration_Install_ion_auth extends MY_Migration {
 				'description' => 'Administrator'
 			],
 			[
-				'name'        => 'members',
+				'name'        => 'member',
 				'description' => 'General User'
+			],
+			[
+				'name'        => 'super',
+				'description' => 'Super User'
 			]
 		];
 		$this->db->insert_batch($this->tables['groups'], $data);
@@ -213,30 +217,7 @@ class Migration_Install_ion_auth extends MY_Migration {
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table($this->tables['login_attempts']);
 
-		//drop tables 'ci_sessions' if it does not exist
-		$this->dbforge->drop_table($this->tables['ci_sessions'], TRUE);
-		$this->dbforge->add_field([
-			'id'=>[
-				'type'=>'VARCHAR',
-				'constraint'=>'40'
-			],
-			'ip_address'=>[
-				'type'=>'VARCHAR',
-				'constraint'=>'45'
-			],
-			'timestamp'=>[
-				'type'=>'MEDIUMINT',
-				'constraint'=>'11',
-				'unsigned' => TRUE,
-				'default' => 0,
-				
-			],
-			'data'=>[
-				'type' => 'blob'
-			]
-		]);
-		$this->dbforge->add_key('id',TRUE);
-		$this->dbforge->create_table($this->tables['ci_sessions']);
+		
 
 		//install the reste of the table
 
@@ -248,6 +229,6 @@ class Migration_Install_ion_auth extends MY_Migration {
 		$this->dbforge->drop_table($this->tables['groups'], TRUE);
 		$this->dbforge->drop_table($this->tables['users_groups'], TRUE);
 		$this->dbforge->drop_table($this->tables['login_attempts'], TRUE);
-		$this->dbforge->drop_table($this->tables['ci_sessions'], TRUE);
+		
 	}
 }

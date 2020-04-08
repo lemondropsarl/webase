@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/lemondropsarl/webase.svg?branch=master)](https://travis-ci.org/lemondropsarl/webase)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Coverage Status](https://coveralls.io/repos/github/lemondropsarl/webase/badge.svg?branch=master)](https://coveralls.io/github/lemondropsarl/webase?branch=master)
-
+![GitHub issues](https://img.shields.io/github/issues-raw/lemondropsarl/webase)
 
 Webase is a php cocktail of base project built on top of **CodeIngiter** to help developers 
 start building new project with no worries about the foundation or starting from scratch

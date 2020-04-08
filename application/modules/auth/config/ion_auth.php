@@ -38,11 +38,15 @@ $config['database_group_name'] = '';
 | -------------------------------------------------------------------------
 | Database table names.
 */
-$config['tables']['users']           = 'users';
-$config['tables']['groups']          = 'groups';
-$config['tables']['users_groups']    = 'users_groups';
-$config['tables']['login_attempts']  = 'login_attempts';
-$config['tables']['ci_sessions']	 = 'ci_sessions';
+$config['tables']['users']           		= 'users';
+$config['tables']['groups']         		= 'groups';
+$config['tables']['users_groups']   		= 'users_groups';
+$config['tables']['login_attempts']  		= 'login_attempts';
+$config['tables']['ci_sessions']			= 'ci_sessions';
+$config['tables']['permissions']            = 'permissions';
+$config['tables']['groups_permissions']      = 'groups_permissions';
+$config['tables']['users_permissions']      = 'users_permissions';
+
 
 /*
  | Users table column and Group table column you want to join WITH.
@@ -52,6 +56,20 @@ $config['tables']['ci_sessions']	 = 'ci_sessions';
  */
 $config['join']['users']  = 'user_id';
 $config['join']['groups'] = 'group_id';
+/*
+ | Permissions table column and Users / Groups permissions table column's you want to join WITH.
+ |
+ | Joins from permissions.perm_id
+ */
+$config['join']['permissions']  = 'perm_id';
+/*
+ | -------------------------------------------------------------------------
+ | Authentication options.
+ | -------------------------------------------------------------------------
+ | Default admin permission = admin_access
+ */
+$config['admin_permission']                 = "admin_access";       // Default administrators permission, use key
+
 
 /*
  | -------------------------------------------------------------------------

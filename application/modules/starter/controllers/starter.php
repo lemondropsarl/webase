@@ -136,9 +136,32 @@ class Starter extends MX_Controller {
                     [
                         'user_id'  => '1',
                         'group_id' => '2',
+                    ],
+                    [
+                        'user_id'  => '1',
+                        'group_id' => '3',
                     ]
-                        ];
+                ];
                 $this->db->insert_batch('users_groups', $ug);
+                $up = [
+                    [
+                        'user_id'   => '1',
+                        'perm_id'   => '1',
+                        'value'     => '1'
+                    ],
+                    [
+                        'user_id'   => '1',
+                        'perm_id'   => '2',
+                        'value'     => '1'
+                    ],
+                    [
+                        'user_id'   => '1',
+                        'perm_id'   => '3',
+                        'value'     => '1'
+                    ] 
+                ];
+                $this->db->insert_batch('users_permissions', $up);
+                
                 $data['req'] = 3;
                 $this->load->view('index', $data);
         }else {

@@ -11,3 +11,6 @@ cache:
 
 script:
     - vendor/bin/phpunit -c application/tests/
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls

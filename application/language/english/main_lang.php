@@ -21,7 +21,7 @@ $lang['submit_install'] = 'Install';
 $lang['submit_create']  = 'Create';
 $lang['submit_go_to_app']   = 'Go To Application';
 $lang['step_1']        = 'Step 1: Database installation';
-$lang['step_2']        = 'Step 2: Admin user creation';
+$lang['step_2']        = 'Step 2: Super admin user creation';
 $lang['step_3']        = 'INSTALLATION DONE SUCCESSFULLY';
 
 //Dashboard
