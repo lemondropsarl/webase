@@ -46,6 +46,8 @@ $config['tables']['ci_sessions']			= 'ci_sessions';
 $config['tables']['permissions']            = 'permissions';
 $config['tables']['groups_permissions']      = 'groups_permissions';
 $config['tables']['users_permissions']      = 'users_permissions';
+$config['tables']['acl_modules']			= 'acl_modules';
+$config['tables']['acl_menus']				= 'acl_menus';
 
 
 /*

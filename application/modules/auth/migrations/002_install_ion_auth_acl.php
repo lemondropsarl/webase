@@ -81,19 +81,19 @@ class Migration_install_ion_auth_acl extends MY_Migration {
         //dump data
         $data =[
             [
-                'perm_key'  => 'access_read',
+                'perm_key'  => 'R',
                 'perm_name' => 'Read'
             ],
             [
-                'perm_key'  => 'access_write',
+                'perm_key'  => 'W',
                 'perm_name' => 'Write'
             ],
             [
-                'perm_key'  => 'access_admin',
+                'perm_key'  => 'A',
                 'perm_name' => 'Admin'
             ],
             [
-                'perm_key'  => 'access_none',
+                'perm_key'  => 'N',
                 'perm_name' => 'None'
             ]
         ];
@@ -143,12 +143,68 @@ class Migration_install_ion_auth_acl extends MY_Migration {
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->add_key('user_id', 'perm_id');
         $this->dbforge->create_table($this->tables['users_permissions']);
+
+        //Add ACL_MODULES
+        $this->dbforge->drop_table($this->tables['acl_modules'],TRUE);
+        $this->dbforge->add_field([
+            'id'=>[
+                'type'           => 'MEDIUMINT',
+				'constraint'     => '8',
+				'unsigned'       => TRUE,
+				'auto_increment' => TRUE
+            ],
+            'module_name' =>[
+                'type'          => 'VARCHAR',
+                'constraint'    => '30',
+                'unsigned'      => TRUE,
+            ],
+            'group_id' => [
+				'type'       => 'MEDIUMINT',
+				'constraint' => '8',
+                'unsigned'   => TRUE,
+                
+            ],
+            'value' =>[
+                'type'       => 'TINYINT',
+                'constraint' => '4',
+                'default'    => '0'
+            ]
+        ]);
+        $this->dbforge->add_key('id',TRUE);
+        $this->dbforge->create_table($this->tables['acl_modules']);
+
+        //ACL_MENU
+        $this->dbforge->drop_table($this->tables['acl_menus'],TRUE);
+        $this->dbforge->add_field([
+            'id'=>[
+                'type'           => 'MEDIUMINT',
+				'constraint'     => '8',
+				'unsigned'       => TRUE,
+				'auto_increment' => TRUE
+            ],
+            'menu_name' =>[
+                'type'          => 'VARCHAR',
+                'constraint'    => '30',
+                'unsigned'      => TRUE,
+            ],
+            'perm_id' => [
+				'type'       => 'MEDIUMINT',
+				'constraint' => '8',
+                'unsigned'   => TRUE,
+                'unique'     => TRUE
+                
+            ]
+        ]);
+        $this->dbforge->add_key('id',TRUE);
+        $this->dbforge->create_table($this->tables['acl_menus']);
     }
 
     public function down() {
         $this->dbforge->drop_table($this->tables['groups_permissions'], TRUE);
         $this->dbforge->drop_table($this->tables['permissions'], TRUE);
         $this->dbforge->drop_table($this->tables['users_permissions'], TRUE);
+        $this->dbforge->drop_table($this->tables['acl_modules'], TRUE);
+        $this->dbforge->drop_table($this->tables['acl_menus'], TRUE);
     }
 
 }

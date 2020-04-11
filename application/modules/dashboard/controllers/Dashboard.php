@@ -7,6 +7,8 @@ class Dashboard extends MX_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('nav_model');
+		
 		$this->load->library('ion_auth');
 		$this->load->library('ion_auth_acl');
 		if (!$this->ion_auth->logged_in()) {
@@ -17,7 +19,8 @@ class Dashboard extends MX_Controller {
            $this->lang->load('main',$siteLang);
         } else {
            $this->lang->load('main','english');
-        }
+		}
+		
 
 	}
 	
@@ -29,8 +32,11 @@ class Dashboard extends MX_Controller {
 	 */
 	public function index()
 	{
-		$data['users_groups']           =   $this->ion_auth->get_users_groups()->result();
-        $data['users_permissions']      =   $this->ion_auth_acl->build_acl();
+		$data['user_groups']           =   $this->ion_auth->get_users_groups()->result();
+		$data['user_permissions']      =   $this->ion_auth_acl->build_Acl();
+		//$data['menus']			  	   =   $this->nav_model->get_nav_menus();
+		//$data['acl_menus']			   =   $this->nav_model->get_nav_menus();
+		//$data['acl_modules']		   =   $this->nav_model->get_nav_menus();
 		$this->load->view('templates/header');
 		$this->load->view('index',$data);
 		$this->load->view('templates/footer');
