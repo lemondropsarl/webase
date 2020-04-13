@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 global $app;
 $this->load->config('app',TRUE);
 $this->app = $this->config->item('application','app');
-
+$active = '';
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,13 +37,52 @@ $this->app = $this->config->item('application','app');
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="javascript:void(0)">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <!-- your sidebar here -->
+        <?php 
+          foreach ($menus as $menu) {
+             
+            if (in_array($menu['name'],$acl_modules) && $menu['name'] == $menu['parent']) { ?>
+                <li class="nav-item <?php if ($menu['name'] == $this->uri->segment(1))
+                {
+                  echo 'active';
+                } ?>">
+                  <a class="nav-link" href="<?php echo base_url($menu['name']);?>">
+                    <i class="<?php echo $menu['icon'];?>"><?php echo $menu['name'];?></i>
+                    <span><?php echo $menu['text'];?></span>
+                  </a>
+                </li>
+           <?php }else { 
+             
+             $colnum = 1; ?>
+             
+              <li class="nav-item <?php if ($menu['name'] == $this->uri->segment(1))
+                {
+                  echo 'active';
+                } ?>">
+                <a class="nav-link collapse" href="#" data-toggle="collapse" data-target="#collapse<?php echo $colnum;?>" aria-expanded="true" aria-controls="collapse<?php echo $colnum;?>">
+                  <?php if (in_array($menu['name'],$acl_modules)) {?>
+                    
+                    <i class="<?php echo $menu['icon'];?>"></i>
+                    <span><?php echo $menu['text'];?></span>
+                <?php  } ?>
+                </a>
+                <div id="collapse<?php echo $colnum;?>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                  <div class=" bg-transparent py-1 rounded">
+                  <?php foreach ($subs as $sub) {
+                    if ($sub['parent'] == $menu['name']) { ?>
+                      <a class="hover" href="<?php echo base_url($sub['url']);?>"><?php echo $sub['text'];?></a><br>
+                     
+                   <?php }
+                 } ?>   
+                 
+                  </div>
+                </div>
+              </li>
+         <?php  
+            $colnum++;
+                }
+          }
+        ?>
+         
         </ul>
       </div>
     </div>

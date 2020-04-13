@@ -19,14 +19,21 @@ class nav_model extends CI_Model {
            $user_id = $this->session->userdata('user_id');
         }
         $user_groups = $this->ion_auth_model->get_user_groups($user_id);
-        
+        $input = array();
         if (is_array($user_groups)) {
           $query = $this->db->select('module_name')
                     ->where_in('group_id',$user_groups)
                     ->where(array('value'=>'1'))
                     ->get('acl_modules');
-           return $query->result();
+          
+              $rows = $query->result_array();
+             foreach ($rows as $module) {
+                if (!in_Array($module['module_name'],$input)) {
+                   array_push($input,$module{'module_name'});
+                }
+             }         
         }
+        return $input;
        
     }
     public function get_acl_menus(){
