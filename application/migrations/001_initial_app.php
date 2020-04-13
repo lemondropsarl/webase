@@ -60,12 +60,19 @@ class Migration_initial_app extends CI_Migration {
                 'type'          => 'VARCHAR',
                 'constraint'    => '50',
 				'unsigned'      => TRUE,
-				'unique'		=> TRUE
+				'null'		    => TRUE
 			],
 			'icon' =>[
                 'type'          => 'VARCHAR',
                 'constraint'    => '50',
-				'unsigned'      => TRUE,				
+				'unsigned'      => TRUE,
+				'null'			=> TRUE				
+			],
+			'icon-name' =>[
+                'type'          => 'VARCHAR',
+                'constraint'    => '50',
+				'unsigned'      => TRUE,
+				'null'			=> TRUE				
 			],
 			'text' =>[
                 'type'          => 'VARCHAR',
@@ -77,17 +84,37 @@ class Migration_initial_app extends CI_Migration {
                 'type'          => 'VARCHAR',
                 'constraint'    => '50',
 				'unsigned'      => TRUE,
-				'unique'		=> TRUE
+				'null'		    => TRUE
 			],
 			'order' =>[
                 'type'          => 'INT',
                 'constraint'    => '11',
 				'unsigned'      => TRUE,
 				
-			]
+			],
+			'perm_key' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '30',
+                'unique'     => TRUE
+                
+            ]
 		]);
 		$this->dbforge->add_key('id',TRUE);
 		$this->dbforge->create_table('navigation_menu');
+		//insert dump data
+		$data =[
+			
+				'name'	=> 'dashboard',
+				'url'	=> 'dashboard',
+				'icon-name'	=> 'dashboard',
+				'text'	=> 'dashboard',
+				'parent'=> 'dashboard',
+				'order' => 1,
+				'perm_key'=> 'R'
+			
+		];
+		$this->db->insert('navigation_menu', $data);
+		
         
     }
 

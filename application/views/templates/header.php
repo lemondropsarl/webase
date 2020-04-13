@@ -45,8 +45,8 @@ $active = '';
                 {
                   echo 'active';
                 } ?>">
-                  <a class="nav-link" href="<?php echo base_url($menu['name']);?>">
-                    <i class="<?php echo $menu['icon'];?>"><?php echo $menu['name'];?></i>
+                  <a class="nav-link" href="<?php echo base_url($menu['url']);?>">
+                    <i class="<?php echo $menu['icon'];?>"><?php echo $menu['icon-name'];?></i>
                     <span><?php echo $menu['text'];?></span>
                   </a>
                 </li>
@@ -61,7 +61,7 @@ $active = '';
                 <a class="nav-link collapse" href="#" data-toggle="collapse" data-target="#collapse<?php echo $colnum;?>" aria-expanded="true" aria-controls="collapse<?php echo $colnum;?>">
                   <?php if (in_array($menu['name'],$acl_modules)) {?>
                     
-                    <i class="<?php echo $menu['icon'];?>"></i>
+                    <i class="<?php echo $menu['icon'];?>"><?php echo $menu['icon-name'];?></i>
                     <span><?php echo $menu['text'];?></span>
                 <?php  } ?>
                 </a>

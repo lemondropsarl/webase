@@ -174,29 +174,6 @@ class Migration_install_ion_auth_acl extends MY_Migration {
         $this->dbforge->create_table($this->tables['acl_modules']);
 
         //ACL_MENU
-        $this->dbforge->drop_table($this->tables['acl_menus'],TRUE);
-        $this->dbforge->add_field([
-            'id'=>[
-                'type'           => 'MEDIUMINT',
-				'constraint'     => '8',
-				'unsigned'       => TRUE,
-				'auto_increment' => TRUE
-            ],
-            'menu_name' =>[
-                'type'          => 'VARCHAR',
-                'constraint'    => '30',
-                'unsigned'      => TRUE,
-            ],
-            'perm_id' => [
-				'type'       => 'MEDIUMINT',
-				'constraint' => '8',
-                'unsigned'   => TRUE,
-                'unique'     => TRUE
-                
-            ]
-        ]);
-        $this->dbforge->add_key('id',TRUE);
-        $this->dbforge->create_table($this->tables['acl_menus']);
     }
 
     public function down() {
@@ -204,7 +181,7 @@ class Migration_install_ion_auth_acl extends MY_Migration {
         $this->dbforge->drop_table($this->tables['permissions'], TRUE);
         $this->dbforge->drop_table($this->tables['users_permissions'], TRUE);
         $this->dbforge->drop_table($this->tables['acl_modules'], TRUE);
-        $this->dbforge->drop_table($this->tables['acl_menus'], TRUE);
+        
     }
 
 }
