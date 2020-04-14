@@ -95,7 +95,7 @@ class Migration_initial_app extends CI_Migration {
 			'perm_key' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '30',
-                'unique'     => TRUE
+                
                 
             ]
 		]);
@@ -106,6 +106,7 @@ class Migration_initial_app extends CI_Migration {
 			
 				'name'	=> 'dashboard',
 				'url'	=> 'dashboard',
+				'icon'  => 'material-icons',
 				'icon-name'	=> 'dashboard',
 				'text'	=> 'dashboard',
 				'parent'=> 'dashboard',
