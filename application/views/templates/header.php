@@ -81,8 +81,7 @@ $active = '';
             $colnum++;
                 }
           }
-        ?>
-         
+        ?>        
         </ul>
       </div>
     </div>
