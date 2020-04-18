@@ -2994,7 +2994,7 @@ class Ion_auth_model extends CI_Model
     {
         $this->trigger_events('permissions');
 
-        $this->db->order_by('perm_name', 'ASC');
+        //$this->db->order_by('perm_name', 'ASC');
 
         $query      =   $this->db->get($this->tables['permissions']);
         $result     =   $query->result();
@@ -3220,7 +3220,19 @@ class Ion_auth_model extends CI_Model
             $this->set_message('group_permission_add_successful');
             return TRUE;
         }
-    }
+	}
+
+	public function update_permission_to_group($id,$value){
+		if(is_array($id)){
+			for ($i=0; $i <sizeof($id) ; $i++) { 
+				# code...
+				$this->db->set('value',$value);
+				$this->where('id',intval($id[$i]));
+				$this->db->update($this->tables['groups_permissions']);	
+			}
+		}
+	}
+
 
     /**
      * Remove Permission From Group
@@ -3268,7 +3280,27 @@ class Ion_auth_model extends CI_Model
             return TRUE;
         }
     }
-
+	
+	/**
+	 * get groups permissions
+	 *
+	 * @return array
+	 */
+	public function get_groups_permissions(){
+		$query = $this->db->get($this->tables['groups_permissions']);
+		$matrix = array();
+		
+		foreach ($query->result_array() as  $v) {
+			$gnames = $v['group_id'];
+			$pnames = $v['perm_id'];
+			$value = $v['value'];
+			$matrix[$gnames][$pnames] = $value;
+		}
+		return $matrix;
+	}
+	public function ggp(){
+		return $this->db->get($this->tables['groups_permissions'])->result();
+	}
     /**
      * Get Group Permissions
      *

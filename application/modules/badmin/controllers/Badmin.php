@@ -33,10 +33,10 @@ class Badmin extends MX_Controller {
         $this->load->view('templates/footer');      
     }
    
-    public function permissions()
+    public function group_permission()
     {
         $data['permissions']    =   $this->ion_auth_acl->permissions('full');
-
+        $data['groups'] = $this->ion_auth->groups()->result();
         $this->load->view('admin/permissions', $data);
     }
 
@@ -146,60 +146,65 @@ class Badmin extends MX_Controller {
         }
     }
 
-    public function groups()
+    public function groups_permissions()
     {
-        $data['groups'] = $this->ion_auth->groups()->result();
 
-        $this->load->view('/admin/groups', $data);
+        $data['menus']			  	   =   $this->nav_model->get_nav_menus();
+		$data['subs']				   =   $data['menus'];
+        $data['acl_modules']		   =   $this->nav_model->get_acl_modules();
+        $data['permissions']           =   $this->ion_auth_acl->permissions('full', 'perm_key');
+        $data['groups']                =   $this->ion_auth->groups()->result();
+        $data['matrix']     =  $this->ion_auth_model->get_groups_permissions();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('badmin/groups_permissions', $data);
+        $this->load->view('templates/footer');
     }
-
-    public function group_permissions()
-    {
-        if( $this->input->post() && $this->input->post('cancel') )
-            redirect('/admin/groups', 'refresh');
-
-        $group_id  =   $this->uri->segment(3);
-
-        if( ! $group_id )
-        {
-            $this->session->set_flashdata('message', "No group ID passed");
-            redirect("admin/groups", 'refresh');
-        }
-
-        if( $this->input->post() && $this->input->post('save') )
-        {
-            foreach($this->input->post() as $k => $v)
+    public function groupsProcess(){
+            $gp = $this->ion_auth_model->ggp();
+            $idsYes = array();
+            $idsNO = array();
+            
+            foreach($this->input->post() as $k =>  $v)
             {
-                if( substr($k, 0, 5) == 'perm_' )
-                {
-                    $permission_id  =   str_replace("perm_","",$k);
-
-                    if( $v == "X" )
-                        $this->ion_auth_acl->remove_permission_from_group($group_id, $permission_id);
-                    else
-                        $this->ion_auth_acl->add_permission_to_group($group_id, $permission_id, $v);
-                }
+               $string = strval($k);
+               $perm_id = $string[0];
+               $group_id = $string[2];
+               foreach ($gp as $p) {
+                  if ($p->group_id == $group_id && $p->perm_id == $perm_id) {
+                     //$this->ion_auth_model->update_permission_to_group($p->id,'1');
+                    $idsYes[] = $p->id;
+                     
+                  }
+               }
             }
+            foreach ($gp as $value) {
+               if (!in_array($value->id,$idsYes)) {
+                  $idsNo[] = $value->id;
+               }
+            }
+            for ($i=0; $i <count($idsYes) ; $i++) { 
+               $this->db->set('value',1);
+               $this->db->where('id',$idsYes[$i]);
+               $this->db->update('groups_permissions');
+            }
+            for ($i=0; $i <count($idsNo) ; $i++) { 
+                $this->db->set('value',0);
+                $this->db->where('id',$idsNo[$i]);
+                $this->db->update('groups_permissions');
+             }
+            //echo print_r($idsYes);
+          //$this->ion_auth_model->update_permission_to_group($idsYes,1);
+          //$this->ion_auth_model->update_permission_to_group($idsNo,'0');
 
-            redirect('/admin/groups', 'refresh');
-        }
-
-        $data['permissions']            =   $this->ion_auth_acl->permissions('full', 'perm_key');
-        $data['group_permissions']      =   $this->ion_auth_acl->get_group_permissions($group_id);
-
-        $this->load->view('/admin/group_permissions', $data);
+          redirect('badmin/groups_permissions', 'refresh');
+        
     }
-    public function manage_user()
+    public function user_permissions()
     {
         $user_id  =   $this->uri->segment(3);
 
-        if( ! $user_id )
-        {
-            $this->session->set_flashdata('message', "No user ID passed");
-            redirect("badmin/users", 'refresh');
-        }
-        if( $this->input->post() && $this->input->post('update') )
-        {
+       
             foreach($this->input->post() as $k => $v)
             {
                 if( substr($k, 0, 5) == 'perm_' )
@@ -213,7 +218,31 @@ class Badmin extends MX_Controller {
                 }
             }
 
-            redirect("/admin/manage-user/{$user_id}", 'refresh');
+            redirect("badmin/manage_user/{$user_id}", 'refresh');
+        
+
+    }
+    public function manage_user()
+    {
+        $user_id  =   $this->uri->segment(3);
+
+        if( ! $user_id )
+        {
+            $this->session->set_flashdata('message', "No user ID passed");
+            redirect("badmin/users", 'refresh');
+        }
+        if ($this->input->post() && $this->input->post('assign')) {
+           foreach ($this->input->post() as $k => $v) {
+               if (substr($k,0,6) == 'group_') {
+                  $group_id = str_replace("group_","",$k);
+                  if ($v == "1") 
+                     $this->ion_auth_model->add_to_group($group_id,$user_id);
+                  else 
+                    $this->ion_auth_model->remove_from_group($group_id,$user_id);
+                  
+               }
+           }
+           redirect("badmin/manage_user/{$user_id}",'refresh');
         }
         $user_groups    =   $this->ion_auth_acl->get_user_groups($user_id);
 
@@ -221,6 +250,7 @@ class Badmin extends MX_Controller {
 		$data['subs']				   =   $data['menus'];
         $data['acl_modules']		   =   $this->nav_model->get_acl_modules();
         $data['user']                  =   $this->ion_auth->user($user_id)->row();
+        $data['groups']                =   $this->ion_auth->groups()->result();
         $data['user_groups']           =   $this->ion_auth->get_users_groups($user_id)->result();
         $data['user_id']               =   $user_id;
         $data['permissions']           =   $this->ion_auth_acl->permissions('full', 'perm_key');

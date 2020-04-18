@@ -75,12 +75,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 								<li><?php echo $ug->description; ?></li>
 								<?php endforeach; ?>
 							</ul>
-							<?php foreach ($user_groups as $group) {?>
-							<a class="rounded btn-secondary d-inline-flex flex-wrap text-white">
-								<?php echo $group->name;?>
-							</a>
-
-							<?php } ?>
 						</div>
 						<hr>
 						<h6 class="card-category">Permissions</h6>
@@ -91,14 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 									(<?php if($this->ion_auth_acl->has_permission($acl['key'], $user_acl)) : ?>Allow<?php else: ?>Deny<?php endif; ?><?php if($acl['inherited']) : ?>
 									<strong>Inherited</strong><?php endif; ?>)</li>
 								<?php endforeach; ?>
-							</ul>
-							<?php foreach ($user_acl as $acl) {?>
-							<a class="rounded btn-primary d-inline-block">
-								<?php echo $acl['name'];?>
-							</a>
-							<?php   }
-
-                             ?>
+							</ul>							
 						</div>
 					</div>
 				</div>
@@ -118,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 						<div class="card-body">
 							<div class="table-responsive">
 
-								<?php echo form_open(); ?>
+								<?php echo form_open('badmin/user_permissions/'.$user_id); ?>
 
 								<table class="table">
 									<thead>
@@ -135,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 										<tr>
 											<td><?php echo $v['name']; ?></td>
 											<td>
-												<?php echo form_radio("perm_{$v['id']}", '1', set_radio("perm_{$v['id']}", '1', $this->ion_auth_acl->is_allowed($v['key'], $user_acl)),'class="custom-radio"'); ?>
+												<?php echo form_radio("perm_{$v['id']}", '1', set_radio("perm_{$v['id']}", '1', $this->ion_auth_acl->is_allowed($v['key'], $user_acl))); ?>
 											</td>
 											<td>
 												<?php echo form_radio("perm_{$v['id']}", '0', set_radio("perm_{$v['id']}", '0', $this->ion_auth_acl->is_denied($v['key'], $user_acl))) ?>
@@ -159,7 +146,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 								<p>
 									<button type="submit" class="btn btn-success" value="update">Update</button>
-									
+
 								</p>
 
 								<?php echo form_close(); ?>
@@ -170,15 +157,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 			</div>
 			<div class="col-md-12">
 				<div class="card">
-					<a href="#collapseCardGroup" class="d-block card-header card-header-warning py-3"
-						data-toggle="collapse" role="button" aria-expanded="true"
-						aria-controls="collapseCardGroup">
+					<a href="#collapseCardGroup" class="d-block card-header card-header-info py-3"
+						data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardGroup">
 						<h4 class="card-title">Manage user's Groups</h4>
 						<p class="card-category">Update user's groups</p>
 					</a>
 					<div class="collapse show" id="collapseCardGroup">
 						<div class="card-body">
-						
+							<div class="table-responsive">
+							<?php echo form_open('badmin/group_permissions'.$user_id);?>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Groups</th>
+											<th>No/Yes</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<?php if ($groups) {
+											$ug = array();
+											foreach ($user_groups as  $value) {
+												$ug[] = $value->id;
+											}
+									
+											foreach ($groups as $v) {?>
+
+										<tr>
+											<td><?php echo $v->name;?></td>
+											<?php if (in_array($v->id,$ug)) { ?>
+											<td>
+												<input type="checkbox" value="1" name="group_<?php echo$v->id;?>" checked>
+											</td>
+
+											<?php	}else {?>
+											<td>
+												<input type="checkbox" value="0" name="group_<?php echo$v->id;?>">
+
+											</td>
+											<?php }?>
+										</tr>
+
+										<?php
+										}
+										}?>
+									</tbody>
+								</table>
+								<p>
+									<button type="submit" class="btn btn-success" value="assign">Assign group</button>
+
+								</p>
+								<?php echo form_close();?>
+							</div>
 						</div>
 					</div>
 				</div>

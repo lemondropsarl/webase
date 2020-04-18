@@ -37,19 +37,8 @@ class Migration_install_ion_auth_acl extends MY_Migration {
                 'type'       => 'TINYINT',
                 'constraint' => '4',
                 'default'    => '0'
-            ],
-            'created_at' =>[
-                'type'       => 'timestamp',
-                'constraint' => '6',
-                'unsigned'   => TRUE,
-                'null'       => TRUE
-            ],
-            'updated_at' =>[
-                'type'       => 'timestamp',
-                'constraint' => '6',
-                'unsigned'   => TRUE,
-                'null'       => TRUE
-            ]           
+            ]
+                       
         ]);
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->add_key('group_id','perm_id');
@@ -93,8 +82,8 @@ class Migration_install_ion_auth_acl extends MY_Migration {
                 'perm_name' => 'Admin'
             ],
             [
-                'perm_key'  => 'N',
-                'perm_name' => 'None'
+                'perm_key'  => 'S',
+                'perm_name' => 'Super'
             ]
         ];
         $this->db->insert_batch($this->tables['permissions'], $data);
@@ -111,14 +100,14 @@ class Migration_install_ion_auth_acl extends MY_Migration {
             'user_id'=>[
                 'type'           => 'MEDIUMINT',
 				'constraint'     => '8',
-                'unsigned'       => TRUE,
+                
                 
 				
             ],
             'perm_id'=>[
                 'type'           => 'MEDIUMINT',
 				'constraint'     => '8',
-                'unsigned'       => TRUE,
+                'unique'         => TRUE,
                 
 				
             ],
@@ -126,22 +115,10 @@ class Migration_install_ion_auth_acl extends MY_Migration {
                 'type'       => 'TINYINT',
                 'constraint' => '4',
                 'default'    => '0'
-            ],
-            'created_at' =>[
-                'type'       => 'timestamp',
-                'constraint' => '6',
-                'unsigned'   => TRUE,
-                'null'       => TRUE
-            ],
-            'updated_at' =>[
-                'type'       => 'timestamp',
-                'constraint' => '6',
-                'unsigned'   => TRUE,
-                'null'       => TRUE
             ]
+            
         ]);
         $this->dbforge->add_key('id', TRUE);
-        $this->dbforge->add_key('user_id', 'perm_id');
         $this->dbforge->create_table($this->tables['users_permissions']);
 
         //Add ACL_MODULES
