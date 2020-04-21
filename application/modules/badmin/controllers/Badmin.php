@@ -10,6 +10,8 @@ class Badmin extends MX_Controller {
         $this->load->library('ion_auth');       
         $this->load->library('ion_auth_acl');
         $this->load->model('nav_model');
+        $this->load->model('admin_model');
+        
         
         
         if( ! $this->ion_auth_acl->has_permission('A') )
@@ -154,19 +156,19 @@ class Badmin extends MX_Controller {
         $data['acl_modules']		   =   $this->nav_model->get_acl_modules();
         $data['permissions']           =   $this->ion_auth_acl->permissions('full', 'perm_key');
         $data['groups']                =   $this->ion_auth->groups()->result();
-        $data['matrix']     =  $this->ion_auth_model->get_groups_permissions();
+        $data['matrix']                =  $this->ion_auth_model->get_groups_permissions();
 
         $this->load->view('templates/header', $data);
         $this->load->view('badmin/groups_permissions', $data);
         $this->load->view('templates/footer');
     }
     public function groupsProcess(){
-            $gp = $this->ion_auth_model->ggp();
-            $idsYes = array();
-            $idsNO = array();
+        $gp = $this->admin_model->ggp();
+        $idsYes = array();
+        $idsNO = array();
             
-            foreach($this->input->post() as $k =>  $v)
-            {
+        foreach($this->input->post() as $k =>  $v)
+        {
                $string = strval($k);
                $perm_id = $string[0];
                $group_id = $string[2];
@@ -178,26 +180,15 @@ class Badmin extends MX_Controller {
                   }
                }
             }
-            foreach ($gp as $value) {
-               if (!in_array($value->id,$idsYes)) {
+        foreach ($gp as $value) {
+            if (!in_array($value->id,$idsYes)) {
                   $idsNo[] = $value->id;
-               }
             }
-            for ($i=0; $i <count($idsYes) ; $i++) { 
-               $this->db->set('value',1);
-               $this->db->where('id',$idsYes[$i]);
-               $this->db->update('groups_permissions');
-            }
-            for ($i=0; $i <count($idsNo) ; $i++) { 
-                $this->db->set('value',0);
-                $this->db->where('id',$idsNo[$i]);
-                $this->db->update('groups_permissions');
-             }
-            //echo print_r($idsYes);
-          //$this->ion_auth_model->update_permission_to_group($idsYes,1);
-          //$this->ion_auth_model->update_permission_to_group($idsNo,'0');
+        }
+        $this->admin_model->update_permission_to_group($idsYes,1);
+        $this->admin_model->update_permission_to_group($idsNO,0);
 
-          redirect('badmin/groups_permissions', 'refresh');
+        redirect('badmin/groups_permissions', 'refresh');
         
     }
     public function user_permissions()

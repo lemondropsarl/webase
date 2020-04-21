@@ -3222,18 +3222,7 @@ class Ion_auth_model extends CI_Model
         }
 	}
 
-	public function update_permission_to_group($id,$value){
-		if(is_array($id)){
-			for ($i=0; $i <sizeof($id) ; $i++) { 
-				# code...
-				$this->db->set('value',$value);
-				$this->where('id',intval($id[$i]));
-				$this->db->update($this->tables['groups_permissions']);	
-			}
-		}
-	}
-
-
+	
     /**
      * Remove Permission From Group
      *
@@ -3297,9 +3286,6 @@ class Ion_auth_model extends CI_Model
 			$matrix[$gnames][$pnames] = $value;
 		}
 		return $matrix;
-	}
-	public function ggp(){
-		return $this->db->get($this->tables['groups_permissions'])->result();
 	}
     /**
      * Get Group Permissions
