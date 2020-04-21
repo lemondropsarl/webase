@@ -128,21 +128,13 @@ class Starter extends MX_Controller {
                 'phone'                   => $phone
                 ];
                 $done = $this->db->insert('users', $user);
+                $id = $this->db->insert_id();
                 $ug = [
-                    [
-                        'user_id'  => '1',
+                        'user_id'  => $id,
                         'group_id' => '1',
-                    ],
-                    [
-                        'user_id'  => '1',
-                        'group_id' => '2',
-                    ],
-                    [
-                        'user_id'  => '1',
-                        'group_id' => '3',
-                    ]
                 ];
-                $this->db->insert_batch('users_groups', $ug);
+                
+                $this->db->insert('users_groups', $ug);
                 $up = [
                     [
                         'user_id'   => '1',
@@ -157,6 +149,11 @@ class Starter extends MX_Controller {
                     [
                         'user_id'   => '1',
                         'perm_id'   => '3',
+                        'value'     => '1'
+                    ],
+                    [
+                        'user_id'   => '1',
+                        'perm_id'   => '4',
                         'value'     => '1'
                     ] 
                 ];

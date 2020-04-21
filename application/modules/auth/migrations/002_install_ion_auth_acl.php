@@ -41,7 +41,7 @@ class Migration_install_ion_auth_acl extends MY_Migration {
                        
         ]);
         $this->dbforge->add_key('id', TRUE);
-        $this->dbforge->add_key('group_id','perm_id');
+       // $this->dbforge->add_key('group_id','perm_id');
         $this->dbforge->create_table($this->tables['groups_permissions']);
          
         //check if tables permissions exists or create them
@@ -61,6 +61,7 @@ class Migration_install_ion_auth_acl extends MY_Migration {
             'perm_name' =>[
                 'type'          => 'VARCHAR',
                 'constraint'    => '100',
+                'unique'        => TRUE
                 
             ]
         ]);
@@ -87,7 +88,49 @@ class Migration_install_ion_auth_acl extends MY_Migration {
             ]
         ];
         $this->db->insert_batch($this->tables['permissions'], $data);
-        
+        $gp =[
+            [
+                'group_id'  => '1',
+                'perm_id'   => '1',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '1',
+                'perm_id'   => '2',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '1',
+                'perm_id'   => '3',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '1',
+                'perm_id'   => '4',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '2',
+                'perm_id'   => '1',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '2',
+                'perm_id'   => '2',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '2',
+                'perm_id'   => '3',
+                'value'     => '1'
+            ],
+            [
+                'group_id'  => '2',
+                'perm_id'   => '4',
+                'value'     => '0'
+            ]
+        ];
+        $this->db->insert_batch($this->tables['groups_permissions'],$gp);
         //check if user_permission exists or create
         $this->dbforge->drop_table($this->tables['users_permissions'], TRUE);
         $this->dbforge->add_field([

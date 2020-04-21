@@ -38,16 +38,12 @@ class Migration_Install_ion_auth extends MY_Migration {
 		// Dumping data for table 'groups'
 		$data = [
 			[
-				'name'        => 'admin',
-				'description' => 'Administrator'
-			],
-			[
-				'name'        => 'member',
-				'description' => 'General User'
-			],
-			[
-				'name'        => 'super',
+				'name'        => 'Super',
 				'description' => 'Super User'
+			],
+			[
+				'name'        => 'Admin',
+				'description' => 'Administrator'
 			]
 		];
 		$this->db->insert_batch($this->tables['groups'], $data);
@@ -176,7 +172,8 @@ class Migration_Install_ion_auth extends MY_Migration {
 			'user_id' => [
 				'type'       => 'MEDIUMINT',
 				'constraint' => '8',
-				'unsigned'   => TRUE
+				'unsigned'   => TRUE,
+				'unique'	=> TRUE
 			],
 			'group_id' => [
 				'type'       => 'MEDIUMINT',
