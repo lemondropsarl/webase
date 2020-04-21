@@ -3195,9 +3195,6 @@ class Ion_auth_model extends CI_Model
         $data   =   array('group_id' => $group_id, 'perm_id' => $perm_id);
 
         $existing_group_permission  =   $this->db->get_where($this->tables['groups_permissions'], $data)->num_rows();
-
-        $data['created_at']     =   strtotime('now');
-        $data['updated_at']     =   strtotime('now');
         $data['value']          =   $value;
 
         $this->db->trans_start();

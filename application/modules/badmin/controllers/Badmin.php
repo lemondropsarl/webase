@@ -44,8 +44,7 @@ class Badmin extends MX_Controller {
 
     public function add_permission()
     {
-        if( $this->input->post() && $this->input->post('cancel') )
-            redirect('/admin/permissions', 'refresh');
+       
 
         $this->form_validation->set_rules('perm_key', 'key', 'required|trim');
         $this->form_validation->set_rules('perm_name', 'name', 'required|trim');
@@ -56,7 +55,7 @@ class Badmin extends MX_Controller {
         {
             $data['message'] = ($this->ion_auth_acl->errors() ? $this->ion_auth_acl->errors() : $this->session->flashdata('message'));
 
-            $this->load->view('admin/add_permission', $data);
+            $this->load->view('badmin/add_permission', $data);
         }
         else
         {
@@ -66,7 +65,7 @@ class Badmin extends MX_Controller {
                 // check to see if we are creating the permission
                 // redirect them back to the admin page
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect("/admin/permissions", 'refresh');
+                redirect("badmin/groups_permissions", 'refresh');
             }
         }
     }
@@ -254,6 +253,21 @@ class Badmin extends MX_Controller {
         $this->load->view('badmin/manage_user', $data);
         $this->load->view('templates/footer');
         
+    }
+    public function add_group(){
+
+        $group_name = $this->input->post('name');
+        $group_desc = $this->input->post('description');
+        $group_id = $this->ion_auth->create_groupe($group_name,$group_desc);
+
+        //add raw permissions value to 0
+        $perm_ids = $this->ion_Auth_acl->permissions();
+        foreach ($perm_ids as $v) {
+           $this->ion_auth_acl->add_permission_to_group($group_id,$v);
+        }
+        redirect('badmin/groups_permissions');
+
+
     }
 
 
