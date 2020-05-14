@@ -3046,7 +3046,7 @@ class Ion_auth_model extends CI_Model
         $user_id || $user_id = $this->session->userdata('user_id');
 
         $this->db->where('user_id', $user_id);
-        $this->db->order_by('created_at', 'ASC');
+        //$this->db->order_by('created_at', 'ASC');
 
         $query  =   $this->db->get($this->tables['users_permissions']);
 
@@ -3217,8 +3217,8 @@ class Ion_auth_model extends CI_Model
             $this->set_message('group_permission_add_successful');
             return TRUE;
         }
-	}
-
+	}	
+	
 	
     /**
      * Remove Permission From Group

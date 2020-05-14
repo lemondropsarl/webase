@@ -8,6 +8,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-12">
 				<div class="card">
 					<div class="card-header card-header-primary">
+						<a class="pull-right card-header-icon" href="<?php echo base_url('auth/create_user');?>">
+							<i class="material-icons">add_circle</i>
+						</a>
 						<h4 class="card-title ">List of users</h4>
                   		<!--p class="card-category"> Here is a subtitle for this table</p-->
 					</div>

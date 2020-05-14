@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 					<div class="card-header-primary">
 						<a class="pull-right card-header-icon" href="#colGroupPermission" data-toggle="collapse"
 							role="button" aria-expanded="true" aria-controls="colGroupPermission">
-							<i class="material-icons">keyboard_array_down</i>
+							<i class="material-icons">keyboard_arrow_down</i>
 						</a>
 						<h4 class="card-title">Group's permissions</h4>
 						<p class="card-category">Assign permissions to groups</p>
@@ -113,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 									</thead>
 									<tbody>
 										<?php 
-									 echo form_open('badmin/groupsProcess');
+									 echo form_open('badmin/update_gp');
                                             foreach (array_keys($matrix) as $group_id) {?>
 										<tr>
 											<td><?php echo $gp[$group_id];?></td>
@@ -160,11 +160,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<?php echo form_open('badmin/add_group');?>
+			<?php echo form_open('auth/create_group');?>
 			<div class="modal-body">
 				<div class="form-group bmd-form-group">
 					<label class="bmd-label-floating">Group name</label>
-					<input type="text" class="form-control" name="name" />
+					<input type="text" class="form-control" name="group_name" />
 				</div>
 				<div class="form-group bmd-form-group">
 					<label class="bmd-label-floating">Group description</label>

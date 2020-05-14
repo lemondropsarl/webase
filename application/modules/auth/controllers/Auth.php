@@ -14,9 +14,13 @@ class Auth extends MX_Controller
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('ion_auth');
+		$this->load->library('ion_auth_acl');
+		
 		$this->load->library('form_validation');
 		//$this->load->library('migration');
 		$this->load->helper(['url', 'language']);
+		$this->load->model('nav_model');
+		
 		$this->load->model('ion_auth_model');
 		
 		$siteLang = $this->session->userdata('site_lang');
@@ -40,11 +44,6 @@ class Auth extends MX_Controller
 		{
 			// redirect them to the login page
 			redirect('auth/login', 'refresh');
-		}
-		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
-		{
-			// redirect them to the home page because they must be an administrator to view this
-			show_error('You must be an administrator to view this page.');
 		}
 		else
 		{
@@ -474,7 +473,7 @@ class Auth extends MX_Controller
 	{
 		$this->data['title'] = $this->lang->line('create_user_heading');
 
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth', 'refresh');
 		}
@@ -502,20 +501,25 @@ class Auth extends MX_Controller
 
 		if ($this->form_validation->run() === TRUE)
 		{
+
 			$email = strtolower($this->input->post('email'));
 			$identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
 			$password = $this->input->post('password');
-
+			$password_confirm = $this->input->post('password_confirm');
+			
 			$additional_data = [
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'company' => $this->input->post('company'),
 				'phone' => $this->input->post('phone'),
 			];
-		}
-		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
-		{
-			// check to see if we are creating the user
+			$groups[] = $this->input->post('group_id');
+			
+			if ($password == $password_confirm) {
+				$this->ion_auth->register($identity, $password, $email, $additional_data,$groups);
+				// check to see if we are creating the user
+				
+			}
 			// redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
 			redirect("auth", 'refresh');
@@ -575,7 +579,15 @@ class Auth extends MX_Controller
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
 
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
+			//$this->$data['user_permissions']      =   $this->ion_auth_acl->build_Acl();
+			$header['menus']			  	   =   $this->nav_model->get_nav_menus();
+		    $header['subs']				       =   $header['menus'];
+			$header['acl_modules']		       =   $this->nav_model->get_acl_modules();
+			$this->data['group_available'] 	   = $this->ion_auth_model->get_groups('full');
+			$this->load->view('templates/header',$header);			
+			$this->load->view('create_user', $this->data);
+			$this->load->view('templates/footer',);
+			
 		}
 	}
 	/**
@@ -738,7 +750,7 @@ class Auth extends MX_Controller
 	{
 		$this->data['title'] = $this->lang->line('create_group_title');
 
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth', 'refresh');
 		}
@@ -753,8 +765,13 @@ class Auth extends MX_Controller
 			{
 				// check to see if we are creating the group
 				// redirect them back to the admin page
+				//add raw permissions value to 0
+				$perm_ids = $this->ion_auth_acl->permissions();
+				foreach ($perm_ids as $v) {
+				   $this->ion_auth_acl->add_permission_to_group($new_group_id,$v);
+				}
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth", 'refresh');
+				redirect("badmin/groups_permissions", 'refresh');
 			}
 			else
             		{

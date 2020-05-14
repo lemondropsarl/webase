@@ -13,13 +13,20 @@ class admin_model extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-    public function update_permission_to_group($id,$value){
-		       $this->db->set('value',1);
-               $this->db->where('id',$id[$i]);
-               $this->db->update('groups_permissions');
+   /**
+	 * update_permission_to_group
+	 *@author Cedric Mataso
+	 * @param  mixed $id
+	 * @param  mixed $value
+	 * @return void
+	 */
+	public function update_permission_to_group($id,$value){
+		$this->db->set('value',$value);
+        $this->db->where('id',$id);
+        $this->db->update('groups_permissions');
     }
     public function ggp(){
-		return $this->db->get($this->tables['groups_permissions'])->result();
+		return $this->db->get('groups_permissions')->result();
 	}
     
 

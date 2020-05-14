@@ -7,6 +7,7 @@ class Dashboard extends MX_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->database();
 		$this->load->model('nav_model');
 		
 		$this->load->library('ion_auth');

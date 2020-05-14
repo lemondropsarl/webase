@@ -61,7 +61,7 @@ class Migration_Install_ion_auth extends MY_Migration {
 			],
 			'ip_address' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '45'
+				'constraint' => '45',
 			],
 			'username' => [
 				'type'       => 'VARCHAR',

@@ -161,7 +161,7 @@ class Badmin extends MX_Controller {
         $this->load->view('badmin/groups_permissions', $data);
         $this->load->view('templates/footer');
     }
-    public function groupsProcess(){
+    public function update_gp(){
         $gp = $this->admin_model->ggp();
         $idsYes = array();
         $idsNO = array();
@@ -178,16 +178,21 @@ class Badmin extends MX_Controller {
                      
                   }
                }
-            }
+        }
         foreach ($gp as $value) {
             if (!in_array($value->id,$idsYes)) {
                   $idsNo[] = $value->id;
             }
         }
-        $this->admin_model->update_permission_to_group($idsYes,1);
-        $this->admin_model->update_permission_to_group($idsNO,0);
+        for ($i=0; $i < count($idsYes) ; $i++) { 
+            
+            $this->admin_model->update_permission_to_group($idsYes[$i],1);
+        }
+        for ($i=0; $i < count($idsNO); $i ++){
+            $this->admin_model->update_permission_to_group($idsNO[$i],0);
+        }
 
-        redirect('badmin/groups_permissions', 'refresh');
+        redirect('badmin/groups_permissions');
         
     }
     public function user_permissions()

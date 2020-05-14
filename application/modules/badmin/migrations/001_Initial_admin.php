@@ -51,6 +51,16 @@ class Migration_initial_admin extends MY_Migration {
 				'parent'=> 'badmin',
 				'order' => 110,
 				'perm_key'=> 'R'
+            ],
+            [
+                'name'	=> 'group_permission',
+                'url'	=> 'badmin/groups_permissions',
+                'icon'  => 'material-icons',
+				'icon-name'	=> '',
+				'text'	=> 'Groups & Permissions',
+				'parent'=> 'badmin',
+				'order' => 120,
+				'perm_key'=> 'R'
             ]
         ];
         $this->db->insert_batch('navigation_menu', $menus);
