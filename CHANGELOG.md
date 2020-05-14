@@ -1,4 +1,7 @@
 # Change Log
+### 0.1.3
+ - Able to create user
+ - Fix bugs and Imprvements
 ### version 0.1.2
 
 - Added ACL

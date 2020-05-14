@@ -64,10 +64,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 				<div class="card card-profile">
 					<div class="card-avatar">
 						<a href="#">
-							<img class="img" src="../assets/img/faces/marc.jpg" />
+							<img class="img" src="<?php echo base_url('assets/img/faces/owner.jpg');?>" />
 						</a>
 					</div>
 					<div class="card-body">
+						<h6 class="card-category">Author / Webase</h6>
+						<h4 class="card-title">Cedric Mataso</h4>
+						<p class="card-description">
+							Don't be scared of the truth because we need to restart the human foundation in truth.
+						</p>
+						<a href="https://twitter.com/CedricMataso" class="btn btn-primary btn-round">Follow</a>
 						<h6 class="card-category">Groups</h6>
 						<div>
 							<ul>
@@ -85,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 									(<?php if($this->ion_auth_acl->has_permission($acl['key'], $user_acl)) : ?>Allow<?php else: ?>Deny<?php endif; ?><?php if($acl['inherited']) : ?>
 									<strong>Inherited</strong><?php endif; ?>)</li>
 								<?php endforeach; ?>
-							</ul>							
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -165,7 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 					<div class="collapse show" id="collapseCardGroup">
 						<div class="card-body">
 							<div class="table-responsive">
-							<?php echo form_open('badmin/group_permissions'.$user_id);?>
+								<?php echo form_open('badmin/group_permissions'.$user_id);?>
 								<table class="table">
 									<thead>
 										<tr>
@@ -187,7 +193,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 											<td><?php echo $v->name;?></td>
 											<?php if (in_array($v->id,$ug)) { ?>
 											<td>
-												<input type="checkbox" value="1" name="group_<?php echo$v->id;?>" checked>
+												<input type="checkbox" value="1" name="group_<?php echo$v->id;?>"
+													checked>
 											</td>
 
 											<?php	}else {?>
