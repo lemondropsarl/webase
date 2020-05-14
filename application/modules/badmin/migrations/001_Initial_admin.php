@@ -19,13 +19,8 @@ class Migration_initial_admin extends MY_Migration {
             [
                 'module_name'   => 'badmin',
                 'group_id'      => 2,
-                'value'         => '0'
-            ],
-            [
-                'module_name'   => 'badmin',
-                'group_id'      => 3,
                 'value'         => '1'
-            ]
+            ],
         ];
         $this->db->insert_batch('acl_modules', $acls);
         
