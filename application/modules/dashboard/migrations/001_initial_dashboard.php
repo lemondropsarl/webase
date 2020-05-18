@@ -28,6 +28,16 @@ class Migration_initial_dashboard extends MY_Migration {
             ]
         ];
         $this->db->insert_batch('acl_modules', $acls);
+        $module = [
+			'module_name'		    => 'dashboard',
+			'module_display_name'	=> 'Dashboard',
+			'module_description'	=> 'connect information for other extension to your dashbord',
+			'module_status'			=>'1',
+			'module_version'		=>'1.0.0',
+			'is_preloaded'			=> '1'
+
+		];
+		$this->db->insert('modules', $module);
         
     }
 

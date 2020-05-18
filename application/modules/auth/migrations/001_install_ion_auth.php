@@ -217,6 +217,18 @@ class Migration_Install_ion_auth extends MY_Migration {
 		
 
 		//install the reste of the table
+		//add information to modules tabe
+		$module = [
+			'module_name'		    => 'auth',
+			'module_display_name'	=> 'Authorization',
+			'module_description'	=> 'Handle your authentification for your app and manage the access control level',
+			'module_status'			=>'1',
+			'module_version'		=>'1.0.0',
+			'is_preloaded'			=> '1'
+
+		];
+		$this->db->insert('modules', $module);
+		
 
 
 	}

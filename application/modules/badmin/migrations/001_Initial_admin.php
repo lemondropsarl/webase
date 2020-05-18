@@ -60,7 +60,16 @@ class Migration_initial_admin extends MY_Migration {
         ];
         $this->db->insert_batch('navigation_menu', $menus);
         
-        
+        $module = [
+			'module_name'		    => 'admin',
+			'module_display_name'	=> 'Administration',
+			'module_description'	=> 'This extension handle all your administration operation and management',
+			'module_status'			=>'1',
+			'module_version'		=>'1.0.0',
+			'is_preloaded'			=> '1'
+
+		];
+		$this->db->insert('modules', $module);
     }
 
     public function down() {
