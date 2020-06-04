@@ -53,9 +53,9 @@ $active = '';
 							<span><?php echo $menu['text'];?></span>
 						</a>
 					</li>
-					<?php }else { 
-             
-             $colnum = 1; ?>
+					<?php }elseif (in_array($menu['name'],$acl_modules)) {
+					
+             	$colnum = 1; ?>
 
 					<li class="nav-item dropdown <?php if ($menu['name'] == $this->uri->segment(1))
                 {
@@ -69,11 +69,13 @@ $active = '';
 							<span><?php echo $menu['text'];?></span>
 							<?php  } ?>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuDropdown<?php echo $colnum;?>">
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="menuDropdown<?php echo $colnum;?>">
 
 							<?php foreach ($subs as $sub) {
                 if ($sub['parent'] == $menu['name']) { ?>
-							    <a class="dropdown-item" href="<?php echo base_url($sub['url']);?>"><?php echo $sub['text'];?></a>
+							<a class="dropdown-item"
+								href="<?php echo base_url($sub['url']);?>"><?php echo $sub['text'];?></a>
 
 							<?php }
                  } ?>
@@ -122,8 +124,8 @@ $active = '';
 								</a>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="material-icons">notifications</i>
 									<span class="notification">5</span>
 									<p class="d-lg-none d-md-block">
@@ -135,15 +137,16 @@ $active = '';
 								</div>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link" href="javascript:void(0)" id="acountDropdownLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link" href="javascript:void(0)" id="acountDropdownLink"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="material-icons">person</i>
 									<p class="d-lg-none d-md-block">
 										Account
 									</p>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
-									<a class="dropdown-item" href="<?php echo base_url('badmin/manage_user/'.$user_id);?>">Profile</a>
+									<a class="dropdown-item"
+										href="<?php echo base_url('badmin/manage_user/'.$user_id);?>">Profile</a>
 									<a class="dropdown-item" href="javascript:void(0)">Settings</a>
 									<a class="dropdown-item" href="<?php echo base_url('auth/logout');?>">Logout</a>
 								</div>

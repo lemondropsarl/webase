@@ -31,21 +31,21 @@ class Migration_install_module extends CI_Migration {
                 'name'	=> 'module',
                 'url'	=> 'module',
                 'icon'  => 'material-icons',
-				'icon-name'	=> 'brightness_auto',
+				'icon-name'	=> 'apps',
 				'text'	=> 'Modules',
-				'parent'=> '',
+				'parent'=> 'module',
 				'order' => 200,
 				'perm_key'=> 'A'
-            ],
+            ]
             
         ];
-        $this->db->insert('navigation_menu', $menu);
+        $this->db->insert_batch('navigation_menu', $menu);
         $module = [
 			'module_name'		    => 'module',
 			'module_display_name'	=> 'Module management',
 			'module_description'	=> 'This extension Helps you manage all your extensions',
 			'module_status'			=>'1',
-			'module_version'		=>'1.0.0',
+			'module_version'		=>'1.0',
 			'is_preloaded'			=> '1'
 
 		];

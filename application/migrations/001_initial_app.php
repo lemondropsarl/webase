@@ -116,7 +116,7 @@ class Migration_initial_app extends CI_Migration {
 		];
 		$this->db->insert('navigation_menu', $data);
 
-		$this->dbforge->drop_table('modules');
+		$this->dbforge->drop_table('modules',TRUE);
 		$this->dbforge->add_field([
 			'id'=>[
                 'type'           => 'MEDIUMINT',
