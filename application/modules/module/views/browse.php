@@ -3,9 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
 <div class="content">
-	<div class="container-fluid">
+	<div class="container-fluid"> 
+        <h2>Preloaded modules</h2>
+        <hr/>
 		<div class="row">
+           
 			<div class="col-md-12">
+                
 				<div class="row">
 					<?php foreach ($modules as $v) {?>
 
@@ -46,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-md-12">
 										<?php if (1.1 > intval($v['module_version'])) {?>
 
-										<a href="#" class="btn btn-just-icon btn-primary">
+										<a href="<?php echo site_url('module/update_extension/'.$v['module_name'])?>" class="btn btn-just-icon btn-primary">
 											<i class="material-icons">arrow_circle_up</i>
 										</a>
 										<?php }?>
@@ -59,5 +63,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 			</div>
 		</div>
+        <h2>Online</h2>
+        <div class="row">
+        </div>
 	</div>
 </div>

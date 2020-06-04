@@ -56,7 +56,9 @@ class Module extends MX_Controller {
 		}
 		
     }
-    public function update_extension($module_name){
+    public function update_extension(){
+		
+		$module_name = $this->uri->segment(3);	
 		$module = $this->module_model->get_module_details_by_name($module_name);
 		
 		$parameters = array();

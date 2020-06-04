@@ -29,12 +29,22 @@ class Migration_install_module extends CI_Migration {
             //Module menu
             [
                 'name'	=> 'module',
-                'url'	=> 'module',
+                'url'	=> '',
                 'icon'  => 'material-icons',
 				'icon-name'	=> 'apps',
 				'text'	=> 'Modules',
-				'parent'=> 'module',
+				'parent'=> '',
 				'order' => 200,
+				'perm_key'=> 'A'
+            ],
+            [
+                'name'	=> 'list_module',
+                'url'	=> 'module',
+                'icon'  => 'material-icons',
+				'icon-name'	=> 'apps',
+				'text'	=> 'Liste de modules',
+				'parent'=> 'module',
+				'order' => 210,
 				'perm_key'=> 'A'
             ]
             
